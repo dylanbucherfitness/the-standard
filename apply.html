@@ -1,0 +1,566 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Apply — The Standard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0E0F11;
+    --panel:#16181C;
+    --line:#2A2D33;
+    --paper:#F3F1EA;
+    --paper-dim:#B9B7B0;
+    --brass:#C9A34E;
+    --brass-dim:#8A733A;
+    --danger:#9B4B3E;
+    --radius:2px;
+    --display: 'Oswald', sans-serif;
+    --body: 'Inter', sans-serif;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--ink);
+    color:var(--paper);
+    font-family:var(--body);
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;}
+
+  /* ---------- top bar ---------- */
+  .topbar{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:22px clamp(20px,5vw,60px);
+    border-bottom:1px solid var(--line);
+  }
+  .brand{
+    font-family:var(--display);
+    letter-spacing:.14em;
+    font-size:15px;
+    font-weight:600;
+    text-transform:uppercase;
+  }
+  .brand span{color:var(--brass);}
+  .tag{
+    font-size:11px;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    color:var(--paper-dim);
+  }
+
+  /* ---------- set tracker (signature progress element) ---------- */
+  .tracker-wrap{
+    padding:18px clamp(20px,5vw,60px) 0;
+  }
+  .tracker-label{
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    font-family:var(--display);
+    font-size:13px;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+    color:var(--paper-dim);
+    margin-bottom:10px;
+  }
+  .tracker-label b{color:var(--brass);font-weight:600;}
+  .reps{
+    display:grid;
+    grid-auto-flow:column;
+    gap:6px;
+    margin-bottom:6px;
+  }
+  .rep{
+    height:5px;
+    background:var(--line);
+    border-radius:1px;
+    transition:background .35s ease;
+  }
+  .rep.done{background:var(--brass);}
+  .rep.current{background:var(--paper-dim);}
+
+  /* ---------- main stage ---------- */
+  main{
+    flex:1;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:40px clamp(20px,5vw,60px) 80px;
+  }
+  .stage{
+    width:100%;
+    max-width:640px;
+  }
+  .step{ display:none; animation:rise .45s ease both; }
+  .step.active{ display:block; }
+  @keyframes rise{
+    from{opacity:0; transform:translateY(14px);}
+    to{opacity:1; transform:translateY(0);}
+  }
+
+  .eyebrow{
+    font-family:var(--display);
+    font-size:12px;
+    letter-spacing:.16em;
+    text-transform:uppercase;
+    color:var(--brass);
+    margin:0 0 14px;
+  }
+  h1.q{
+    font-family:var(--display);
+    font-weight:600;
+    font-size:clamp(24px,4vw,34px);
+    line-height:1.25;
+    margin:0 0 8px;
+  }
+  .sub{
+    color:var(--paper-dim);
+    font-size:15px;
+    margin:0 0 28px;
+    line-height:1.5;
+  }
+
+  input[type=text], input[type=email], input[type=tel], textarea{
+    width:100%;
+    background:transparent;
+    border:none;
+    border-bottom:2px solid var(--line);
+    color:var(--paper);
+    font-family:var(--body);
+    font-size:20px;
+    padding:10px 2px;
+    outline:none;
+    transition:border-color .2s ease;
+  }
+  input:focus, textarea:focus{ border-color:var(--brass); }
+  textarea{ resize:vertical; min-height:90px; font-size:17px; }
+  ::placeholder{ color:#565A61; }
+
+  .field{ margin-bottom:26px; }
+  .field label.small{
+    display:block;
+    font-size:12px;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    color:var(--paper-dim);
+    margin-bottom:8px;
+  }
+
+  .options{ display:flex; flex-direction:column; gap:10px; }
+  .opt{
+    text-align:left;
+    background:var(--panel);
+    border:1px solid var(--line);
+    color:var(--paper);
+    font-family:var(--body);
+    font-size:16px;
+    padding:16px 18px;
+    border-radius:var(--radius);
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    transition:border-color .15s ease, background .15s ease, transform .1s ease;
+  }
+  .opt:hover{ border-color:var(--brass-dim); background:#1B1E23; }
+  .opt.selected{ border-color:var(--brass); background:#1B1E23; }
+  .opt .k{
+    font-family:var(--display);
+    font-size:12px;
+    color:var(--paper-dim);
+    letter-spacing:.08em;
+  }
+  .opt.selected .k{ color:var(--brass); }
+
+  .nav-row{
+    display:flex;
+    align-items:center;
+    gap:18px;
+    margin-top:34px;
+  }
+  button.primary{
+    font-family:var(--display);
+    font-weight:600;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+    font-size:14px;
+    background:var(--brass);
+    color:#15130B;
+    border:none;
+    padding:15px 30px;
+    border-radius:var(--radius);
+    cursor:pointer;
+    transition:opacity .15s ease, transform .1s ease;
+  }
+  button.primary:hover{ opacity:.9; }
+  button.primary:active{ transform:scale(.98); }
+  button.primary:disabled{ opacity:.35; cursor:not-allowed; }
+  button.ghost{
+    background:none;
+    border:none;
+    color:var(--paper-dim);
+    font-family:var(--body);
+    font-size:14px;
+    cursor:pointer;
+    text-decoration:underline;
+    text-underline-offset:3px;
+  }
+  .hint{ color:var(--paper-dim); font-size:12px; margin-top:10px; }
+
+  /* ---------- outcome screens ---------- */
+  .outcome-icon{
+    width:46px;height:46px;
+    border:2px solid var(--brass);
+    border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    margin-bottom:22px;
+    font-family:var(--display);
+    color:var(--brass);
+    font-size:20px;
+  }
+  .outcome-icon.no{ border-color:var(--danger); color:var(--danger); }
+  #calendly-holder{
+    margin-top:24px;
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    overflow:hidden;
+    background:var(--panel);
+  }
+  .calendly-inline-widget{ min-width:280px; height:680px; }
+
+  footer{
+    text-align:center;
+    padding:18px;
+    font-size:11px;
+    color:#54585F;
+    border-top:1px solid var(--line);
+  }
+
+  @media (max-width:520px){
+    .reps{ grid-auto-flow: row; grid-template-columns: repeat(7,1fr); }
+  }
+</style>
+</head>
+<body>
+
+  <div class="topbar">
+    <div class="brand">THE <span>STANDARD</span></div>
+    <div class="tag">Coaching Application</div>
+  </div>
+
+  <div class="tracker-wrap">
+    <div class="tracker-label"><span>Intake</span><b id="setLabel">SET 01 / 07</b></div>
+    <div class="reps" id="reps"></div>
+  </div>
+
+  <main>
+    <div class="stage" id="stage">
+
+      <!-- STEP 1 -->
+      <section class="step active" data-step="1">
+        <p class="eyebrow">Before we talk</p>
+        <h1 class="q">What's your name, and where should we send your call details?</h1>
+        <p class="sub">This isn't a newsletter signup. It's how we reach you if you qualify for a 1:1 call.</p>
+        <div class="field">
+          <label class="small">Full name</label>
+          <input type="text" id="q1_name" placeholder="Your name" autocomplete="name">
+        </div>
+        <div class="field">
+          <label class="small">Email</label>
+          <input type="email" id="q1_email" placeholder="you@email.com" autocomplete="email">
+        </div>
+        <div class="field">
+          <label class="small">Phone (optional)</label>
+          <input type="tel" id="q1_phone" placeholder="(___) ___-____" autocomplete="tel">
+        </div>
+        <div class="nav-row">
+          <button class="primary" onclick="next(1)">Continue</button>
+        </div>
+      </section>
+
+      <!-- STEP 2 -->
+      <section class="step" data-step="2">
+        <p class="eyebrow">Life stage</p>
+        <h1 class="q">What's going on right now that made you look this up?</h1>
+        <p class="sub">Pick the one that fits closest.</p>
+        <div class="options" data-group="q2"></div>
+        <div class="nav-row"><button class="ghost" onclick="back(2)">Back</button></div>
+      </section>
+
+      <!-- STEP 3 -->
+      <section class="step" data-step="3">
+        <p class="eyebrow">Track record</p>
+        <h1 class="q">Have you worked with a coach or trainer before?</h1>
+        <div class="options" data-group="q3"></div>
+        <div class="nav-row"><button class="ghost" onclick="back(3)">Back</button></div>
+      </section>
+
+      <!-- STEP 4 -->
+      <section class="step" data-step="4">
+        <p class="eyebrow">Reality check</p>
+        <h1 class="q">How much time can you realistically give this per week?</h1>
+        <p class="sub">Answer for the life you actually have, not the one you wish you had.</p>
+        <div class="options" data-group="q4"></div>
+        <div class="nav-row"><button class="ghost" onclick="back(4)">Back</button></div>
+      </section>
+
+      <!-- STEP 5 -->
+      <section class="step" data-step="5">
+        <p class="eyebrow">Standard of commitment</p>
+        <h1 class="q">Coaching includes daily check-ins and nutrition tracking. Are you willing to actually do that?</h1>
+        <p class="sub">Be honest — this helps us prep for your call, it won't disqualify you either way.</p>
+        <div class="options" data-group="q5"></div>
+        <div class="nav-row"><button class="ghost" onclick="back(5)">Back</button></div>
+      </section>
+
+      <!-- STEP 6 -->
+      <section class="step" data-step="6">
+        <p class="eyebrow">Investment</p>
+        <h1 class="q">What monthly investment did you have in mind for 1:1 coaching?</h1>
+        <div class="options" data-group="q6"></div>
+        <div class="nav-row"><button class="ghost" onclick="back(6)">Back</button></div>
+      </section>
+
+      <!-- STEP 7 -->
+      <section class="step" data-step="7">
+        <p class="eyebrow">Last one</p>
+        <h1 class="q">If this works, what does that actually change for you?</h1>
+        <p class="sub">One or two sentences. This is what we'll build the call around.</p>
+        <div class="field">
+          <textarea id="q7_goal" placeholder="e.g. I want to have the energy to keep up with my kids and stop starting over every January."></textarea>
+        </div>
+        <!-- honeypot: hidden from real users, catches basic bots -->
+        <input type="text" id="hp_field" name="company" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;">
+        <div class="nav-row">
+          <button class="primary" id="submitBtn" onclick="submitApplication()">Submit application</button>
+          <button class="ghost" onclick="back(7)">Back</button>
+        </div>
+        <p class="hint" id="submitError" style="display:none;color:#C77A6B;">Something didn't send right. Email your answers directly to <a href="mailto:hello@example.com">hello@example.com</a> and we'll follow up personally.</p>
+      </section>
+
+      <!-- OUTCOME: QUALIFIED -->
+      <section class="step" data-step="qualified">
+        <div class="outcome-icon">✓</div>
+        <p class="eyebrow">You're in</p>
+        <h1 class="q">You qualify for a 1:1 strategy call.</h1>
+        <p class="sub">Grab a time below. Come with your schedule in front of you — we'll build the first draft of your plan on the call.</p>
+        <div id="calendly-holder">
+          <div class="calendly-inline-widget" data-url="https://calendly.com/dylanbucherfitness/coaching-application" style="min-width:280px;height:680px;"></div>
+        </div>
+        <p class="hint">Calendar not loading? <a href="https://calendly.com/dylanbucherfitness/coaching-application" target="_blank" id="calendlyFallback">Book directly here instead.</a></p>
+      </section>
+
+      <!-- OUTCOME: NOT YET -->
+      <section class="step" data-step="notyet">
+        <div class="outcome-icon no">—</div>
+        <p class="eyebrow">Not quite yet</p>
+        <h1 class="q">1:1 coaching isn't the right fit for you right now.</h1>
+        <p class="sub" id="notyetReason">Based on your answers, 1:1 coaching won't get you the outcome you're after at this time — and we'd rather tell you that now than take your money.</p>
+        <p class="sub">That doesn't mean start from zero. Grab The Daily Standard — a free training and nutrition resource — and reapply for 1:1 coaching whenever your time or budget changes.</p>
+        <div class="nav-row">
+          <a href="https://instagram.com/dybuc" target="_blank"><button class="primary">Get The Daily Standard</button></a>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <footer id="footerNote">THE STANDARD — Application data is used only to prepare for your call and is never sold or shared.</footer>
+
+  <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
+  <script>
+    // ---------------- CONFIG ----------------
+    // Replace with your real Formspree endpoint (formspree.io) and Calendly link.
+    const FORMSPREE_ENDPOINT = "https://formspree.io/f/YOUR_FORM_ID";
+    const CALENDLY_URL = "https://calendly.com/dylanbucherfitness/coaching-application";
+
+    // Manually update this as founding-rate spots fill (see business plan Section 9.1 — capped at 10).
+    const FOUNDING_SPOTS_REMAINING = 10;
+
+    document.addEventListener("DOMContentLoaded", () => {
+      if (FOUNDING_SPOTS_REMAINING > 0 && FOUNDING_SPOTS_REMAINING <= 10) {
+        const tag = document.querySelector(".tag");
+        tag.textContent = `Coaching Application \u2014 ${FOUNDING_SPOTS_REMAINING} founding spots left`;
+      }
+    });
+
+    // ---------------- QUESTION DATA ----------------
+    const options = {
+      q2: [
+        ["A","Low energy / brain fog most days"],
+        ["B","Weight crept up and I want it handled"],
+        ["C","Used to train seriously and miss that structure"],
+        ["D","I'm fine physically — I want to be more disciplined overall"],
+      ],
+      q3: [
+        ["A","Yes, and it worked — I just stopped"],
+        ["B","Yes, but it didn't really stick"],
+        ["C","No, this would be my first time"],
+      ],
+      q4: [
+        ["A","4+ hours a week, easily"],
+        ["B","2–4 hours a week if it's efficient"],
+        ["C","Under 2 hours — my schedule is packed"],
+        ["D","Honestly not sure yet"],
+      ],
+      q5: [
+        ["A","Yes — I want the accountability"],
+        ["B","I'll try, but I'm not great with consistency"],
+        ["C","Probably not — I want something more hands-off"],
+      ],
+      q6: [
+        ["A","$400+ / month"],
+        ["B","$200–$400 / month"],
+        ["C","Under $200 / month"],
+        ["D","Not sure — depends what's included"],
+      ],
+    };
+
+    const answers = {};
+    let current = 1;
+    const TOTAL = 7;
+
+    function buildOptions(){
+      Object.keys(options).forEach(group=>{
+        const wrap = document.querySelector(`[data-group="${group}"]`);
+        options[group].forEach(([key,label])=>{
+          const btn = document.createElement("button");
+          btn.className = "opt";
+          btn.type = "button";
+          btn.innerHTML = `<span>${label}</span><span class="k">${key}</span>`;
+          btn.onclick = () => selectOption(group, key, label, btn);
+          wrap.appendChild(btn);
+        });
+      });
+    }
+    buildOptions();
+
+    function selectOption(group, key, label, btn){
+      answers[group] = { key, label };
+      [...btn.parentElement.children].forEach(c=>c.classList.remove("selected"));
+      btn.classList.add("selected");
+      setTimeout(()=> next(parseInt(document.querySelector(".step.active").dataset.step)), 220);
+    }
+
+    function renderTracker(){
+      const wrap = document.getElementById("reps");
+      wrap.innerHTML = "";
+      for(let i=1;i<=TOTAL;i++){
+        const d = document.createElement("div");
+        d.className = "rep" + (i < current ? " done" : i === current ? " current" : "");
+        wrap.appendChild(d);
+      }
+      document.getElementById("setLabel").textContent = `SET ${String(current).padStart(2,"0")} / ${String(TOTAL).padStart(2,"0")}`;
+    }
+
+    function showStep(key){
+      document.querySelectorAll(".step").forEach(s=>s.classList.remove("active"));
+      document.querySelector(`[data-step="${key}"]`).classList.add("active");
+    }
+
+    function next(fromStep){
+      if(fromStep === 1){
+        const name = document.getElementById("q1_name").value.trim();
+        const email = document.getElementById("q1_email").value.trim();
+        if(!name || !email){ flashRequired(); return; }
+        answers.name = name;
+        answers.email = email;
+        answers.phone = document.getElementById("q1_phone").value.trim();
+      }
+      if(fromStep < TOTAL){
+        current = fromStep + 1;
+        showStep(current);
+        renderTracker();
+        window.scrollTo({top:0, behavior:"smooth"});
+      }
+    }
+
+    function back(fromStep){
+      if(fromStep > 1){
+        current = fromStep - 1;
+        showStep(current);
+        renderTracker();
+      }
+    }
+
+    function flashRequired(){
+      const box = document.querySelector('[data-step="1"]');
+      box.style.animation = "none";
+      requestAnimationFrame(()=>{ box.style.animation = "rise .3s ease"; });
+    }
+
+    // ---------------- QUALIFICATION LOGIC ----------------
+    // Two hard gates only: real weekly time, and stated budget.
+    // Check-in willingness (q5) is captured as a note for the call, not a gate —
+    // building consistency is what coaching is for, not a prerequisite to start.
+    function isQualified(){
+      const time = answers.q4?.key;    // must be A or B (2+ hrs/week, guaranteed)
+      const budget = answers.q6?.key;  // must not be C (under $200/mo)
+
+      const timeOK = time === "A" || time === "B";
+      const budgetOK = budget !== "C";
+
+      return timeOK && budgetOK;
+    }
+
+    function reasonForNotYet(){
+      const time = answers.q4?.key;
+      const budget = answers.q6?.key;
+      const timeOK = time === "A" || time === "B";
+      const budgetOK = budget !== "C";
+      if(!timeOK) return "1:1 coaching requires at least 2 hours a week you can reliably count on, and it sounds like your schedule can't guarantee that right now — that's a scheduling reality, not a discipline problem, and it can change.";
+      if(!budgetOK) return "Our 1:1 coaching is priced for the level of daily, hands-on support it includes, and it sounds like that's outside your range right now.";
+      return "Based on your answers, now isn't the right moment for 1:1 coaching — but that can change fast.";
+    }
+
+    async function submitApplication(){
+      // honeypot check — if this hidden field is filled, silently treat as spam
+      const honeypot = document.getElementById("hp_field").value;
+
+      answers.goal = document.getElementById("q7_goal").value.trim();
+      const qualified = isQualified();
+      answers.qualified = qualified ? "YES" : "NO";
+      answers.checkin_willingness = answers.q5?.label || "Not answered";
+
+      if(honeypot){ return; } // bot — stop silently, no UI change
+
+      const btn = document.getElementById("submitBtn");
+      const errBox = document.getElementById("submitError");
+      btn.disabled = true;
+      btn.textContent = "Submitting...";
+
+      try{
+        const res = await fetch(FORMSPREE_ENDPOINT, {
+          method: "POST",
+          headers: { "Content-Type": "application/json", "Accept": "application/json" },
+          body: JSON.stringify(answers)
+        });
+        if(!res.ok) throw new Error("submission failed");
+
+        if(qualified){
+          showStep("qualified");
+        }else{
+          document.getElementById("notyetReason").textContent = reasonForNotYet();
+          showStep("notyet");
+        }
+        window.scrollTo({top:0, behavior:"smooth"});
+      }catch(e){
+        btn.disabled = false;
+        btn.textContent = "Submit application";
+        errBox.style.display = "block";
+      }
+    }
+
+    renderTracker();
+  </script>
+</body>
+</html>

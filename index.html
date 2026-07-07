@@ -1,841 +1,825 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>The Standard — Dylan Bucher</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500&family=Montserrat:wght@500;600;700&display=swap" rel="stylesheet">
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --black:    #0A0A0A;
-      --charcoal: #161616;
-      --graphite: #242424;
-      --border:   rgba(255,255,255,0.06);
-      --silver:   #9A9A9A;
-      --white:    #EFEFEF;
-      --copper:   #B87333;
-      --copper-glow: rgba(184,115,51,0.12);
-    }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      background: var(--black);
-      color: var(--white);
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 300;
-      line-height: 1.6;
-      -webkit-font-smoothing: antialiased;
-      overflow-x: hidden;
-    }
-
-    /* ─── NAV ─── */
-    nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
-      padding: 1.2rem 2.5rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: rgba(10,10,10,0.95);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border-bottom: 1px solid var(--border);
-    }
-
-    .nav-logo {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 0.65rem;
-      font-weight: 700;
-      letter-spacing: 0.25em;
-      text-transform: uppercase;
-      color: var(--white);
-      text-decoration: none;
-    }
-
-    .nav-cta {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 0.62rem;
-      font-weight: 600;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--copper);
-      text-decoration: none;
-      border: 1px solid rgba(184,115,51,0.45);
-      padding: 0.48rem 1.1rem;
-      transition: all 0.22s;
-    }
-
-    .nav-cta:hover {
-      background: var(--copper);
-      color: var(--black);
-    }
-
-    /* ─── HERO ─── */
-    .hero {
-      min-height: 100svh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-      padding: 6rem 2rem 4rem;
-      background: var(--black);
-    }
-
-    .hero-glow {
-      position: absolute;
-      top: -20%;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 600px;
-      height: 600px;
-      background: radial-gradient(circle, rgba(184,115,51,0.07) 0%, transparent 65%);
-      pointer-events: none;
-    }
-
-    .hero-content {
-      position: relative;
-      z-index: 2;
-      max-width: 800px;
-      width: 100%;
-    }
-
-    .hero-eyebrow {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 0.62rem;
-      font-weight: 600;
-      letter-spacing: 0.35em;
-      text-transform: uppercase;
-      color: var(--copper);
-      margin-bottom: 1.5rem;
-      animation: fadeUp 0.8s 0.1s ease forwards;
-      opacity: 0;
-    }
-
-    .hero h1 {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(5.5rem, 22vw, 14rem);
-      font-weight: 400;
-      line-height: 0.88;
-      letter-spacing: 0.04em;
-      color: var(--white);
-      margin-bottom: 0;
-      animation: fadeUp 0.8s 0.25s ease forwards;
-      opacity: 0;
-    }
-
-    .hero-rule {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      margin: 2rem auto;
-      max-width: 320px;
-      animation: fadeUp 0.8s 0.4s ease forwards;
-      opacity: 0;
-    }
-
-    .hero-rule span {
-      flex: 1;
-      height: 1px;
-      background: var(--border);
-    }
-
-    .hero-rule em {
-      font-family: 'Cormorant Garamond', serif;
-      font-style: italic;
-      font-size: 0.9rem;
-      color: var(--silver);
-      white-space: nowrap;
-    }
-
-    .hero-sub {
-      font-size: clamp(0.9rem, 1.8vw, 1rem);
-      color: var(--silver);
-      max-width: 420px;
-      margin: 0 auto 3rem;
-      line-height: 2;
-      animation: fadeUp 0.8s 0.5s ease forwards;
-      opacity: 0;
-    }
-
-    .hero-cta-group {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 1.2rem;
-      animation: fadeUp 0.8s 0.65s ease forwards;
-      opacity: 0;
-    }
-
-    .btn-primary {
-      display: inline-block;
-      background: var(--copper);
-      color: var(--black);
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 700;
-      font-size: 0.7rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      text-decoration: none;
-      padding: 1rem 2.8rem;
-      transition: all 0.2s;
-    }
-
-    .btn-primary:hover {
-      background: #c98843;
-      transform: translateY(-2px);
-      box-shadow: 0 10px 32px rgba(184,115,51,0.22);
-    }
-
-    .hero-note {
-      font-size: 0.68rem;
-      letter-spacing: 0.12em;
-      color: rgba(154,154,154,0.4);
-      text-transform: uppercase;
-      font-family: 'Montserrat', sans-serif;
-    }
-
-    .hero-scroll-line {
-      position: absolute;
-      bottom: 2.5rem;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 1px;
-      height: 50px;
-      background: linear-gradient(to bottom, var(--copper), transparent);
-      animation: fadeUp 0.8s 1s ease forwards, pulse 2.5s 1.5s ease-in-out infinite;
-      opacity: 0;
-    }
-
-    /* ─── SECTION WRAPPER ─── */
-    .wrap {
-      max-width: 700px;
-      margin: 0 auto;
-      padding: 6rem 2rem;
-    }
-
-    .wrap--wide {
-      max-width: 820px;
-      margin: 0 auto;
-      padding: 6rem 2rem;
-    }
-
-    hr.div {
-      border: none;
-      border-top: 1px solid var(--border);
-      margin: 0;
-    }
-
-    /* ─── TYPOGRAPHY ─── */
-    .label {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 0.6rem;
-      font-weight: 700;
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: var(--copper);
-      margin-bottom: 1.2rem;
-    }
-
-    h2 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(2rem, 5vw, 3rem);
-      font-weight: 700;
-      color: var(--white);
-      line-height: 1.15;
-      margin-bottom: 1.4rem;
-    }
-
-    .accent { color: var(--copper); }
-
-    p.body {
-      font-size: 0.98rem;
-      color: var(--silver);
-      line-height: 1.95;
-      margin-bottom: 1.2rem;
-    }
-
-    /* ─── STORY ─── */
-    .story-bg { background: var(--charcoal); }
-
-    .story-text {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(1.1rem, 2.5vw, 1.3rem);
-      color: rgba(239,239,239,0.82);
-      line-height: 1.85;
-      margin-bottom: 1.4rem;
-      text-align: left;
-    }
-
-    .story-attr {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 0.65rem;
-      font-weight: 700;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--copper);
-      margin-top: 2rem;
-      text-align: left;
-    }
-
-    /* ─── PHILOSOPHY PILLARS ─── */
-    .pillars {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1px;
-      background: var(--border);
-      margin-top: 3.5rem;
-    }
-
-    .pillar {
-      background: var(--charcoal);
-      padding: 2.5rem 1.8rem;
-      transition: background 0.2s;
-    }
-
-    .pillar:hover { background: var(--graphite); }
-
-    .pillar-num {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 3rem;
-      color: var(--copper);
-      opacity: 0.2;
-      line-height: 1;
-      margin-bottom: 0.8rem;
-    }
-
-    .pillar-title {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 0.62rem;
-      font-weight: 700;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--white);
-      margin-bottom: 0.8rem;
-    }
-
-    .pillar-body {
-      font-size: 0.88rem;
-      color: var(--silver);
-      line-height: 1.75;
-    }
-
-    /* ─── THESIS ─── */
-    .thesis-bg {
-      background: var(--graphite);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .thesis-bg::before,
-    .thesis-bg::after {
-      content: '';
-      position: absolute;
-      left: 0; right: 0;
-      height: 1px;
-    }
-
-    .thesis-bg::before {
-      top: 0;
-      background: linear-gradient(to right, transparent, var(--copper), transparent);
-    }
-
-    .thesis-bg::after {
-      bottom: 0;
-      background: linear-gradient(to right, transparent, rgba(184,115,51,0.3), transparent);
-    }
-
-    .thesis-inner {
-      max-width: 700px;
-      margin: 0 auto;
-      padding: 6rem 2rem;
-      text-align: center;
-    }
-
-    .thesis-main {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(1.6rem, 4.5vw, 2.7rem);
-      font-weight: 700;
-      color: var(--white);
-      line-height: 1.3;
-      margin-bottom: 1.5rem;
-    }
-
-    .thesis-main em {
-      color: var(--copper);
-      font-style: italic;
-    }
-
-    .thesis-sub {
-      font-family: 'DM Sans', sans-serif;
-      font-size: 0.95rem;
-      color: var(--silver);
-      line-height: 1.9;
-      max-width: 380px;
-      margin: 0 auto;
-    }
-
-    /* ─── TAGS ─── */
-    .tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      justify-content: center;
-      margin: 2.2rem 0 1.5rem;
-    }
-
-    .tag {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 0.62rem;
-      font-weight: 600;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      border: 1px solid var(--graphite);
-      color: var(--silver);
-      padding: 0.45rem 0.9rem;
-      transition: all 0.2s;
-    }
-
-    .tag:hover { border-color: var(--copper); color: var(--copper); }
-
-    .not-for {
-      font-size: 0.82rem;
-      color: rgba(154,154,154,0.35);
-      font-style: italic;
-    }
-
-    /* ─── DELIVERABLES ─── */
-    .deliverables {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1px;
-      background: var(--border);
-      margin-top: 3.5rem;
-      text-align: left;
-    }
-
-    .deliverable {
-      background: var(--charcoal);
-      padding: 2.2rem;
-      transition: background 0.2s;
-    }
-
-    .deliverable:hover { background: var(--graphite); }
-
-    .deliverable:nth-child(5) {
-      grid-column: 1 / -1;
-    }
-
-    .d-label {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 0.58rem;
-      font-weight: 700;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--copper);
-      margin-bottom: 0.75rem;
-    }
-
-    .d-text {
-      font-size: 0.9rem;
-      color: var(--silver);
-      line-height: 1.8;
-    }
-
-    /* ─── DEAL ─── */
-    .deal-bg { background: var(--black); }
-
-    .deal-quote {
-      margin: 3rem auto 0;
-      max-width: 560px;
-      padding: 2.5rem 2.5rem 2.5rem 2rem;
-      border-left: 2px solid var(--copper);
-      background: var(--charcoal);
-    }
-
-    .deal-quote p {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(1.1rem, 2.5vw, 1.45rem);
-      font-style: italic;
-      color: var(--white);
-      line-height: 1.75;
-    }
-
-    .deal-quote strong {
-      font-style: normal;
-      color: var(--copper);
-      font-weight: 700;
-    }
-
-    /* ─── GUARANTEE ─── */
-    .guarantee-bg { background: var(--charcoal); }
-
-    .guarantee-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1px;
-      background: var(--border);
-      margin-top: 3rem;
-      text-align: left;
-    }
-
-    .g-card {
-      background: var(--black);
-      padding: 2.5rem 2rem;
-      transition: background 0.2s;
-    }
-
-    .g-card:hover { background: var(--graphite); }
-
-    .g-num {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 3.5rem;
-      color: var(--copper);
-      opacity: 0.18;
-      line-height: 1;
-      margin-bottom: 1rem;
-    }
-
-    .g-title {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 0.62rem;
-      font-weight: 700;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--white);
-      margin-bottom: 0.8rem;
-    }
-
-    .g-body {
-      font-size: 0.9rem;
-      color: var(--silver);
-      line-height: 1.8;
-    }
-
-    .guarantee-note {
-      font-size: 0.8rem;
-      color: rgba(154,154,154,0.3);
-      font-style: italic;
-      margin-top: 2rem;
-      text-align: center;
-    }
-
-    /* ─── PROOF ─── */
-    .proof-bg { background: var(--black); }
-
-    .testimonial {
-      margin: 4rem auto 0;
-      max-width: 520px;
-      background: var(--charcoal);
-      border-top: 2px solid var(--copper);
-      padding: 3rem 2.5rem 2.5rem;
-      text-align: left;
-    }
-
-    .testimonial blockquote {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.25rem;
-      font-style: italic;
-      color: var(--white);
-      line-height: 1.7;
-      margin-bottom: 1.5rem;
-    }
-
-    .testimonial cite {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 0.62rem;
-      font-weight: 700;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--copper);
-      font-style: normal;
-    }
-
-    /* ─── APPLY ─── */
-    .apply-bg {
-      background: var(--charcoal);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .apply-bg::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(ellipse at 50% 0%, rgba(184,115,51,0.06) 0%, transparent 60%);
-      pointer-events: none;
-    }
-
-    .apply-note {
-      font-size: 0.72rem;
-      color: rgba(154,154,154,0.28);
-      margin-top: 1.4rem;
-      font-style: italic;
-      letter-spacing: 0.05em;
-    }
-
-    /* ─── FOOTER ─── */
-    footer {
-      background: #060606;
-      padding: 2.5rem 2rem;
-      text-align: center;
-      border-top: 1px solid var(--border);
-    }
-
-    .footer-brand {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 1.4rem;
-      letter-spacing: 0.15em;
-      color: var(--copper);
-      margin-bottom: 0.6rem;
-      opacity: 0.7;
-    }
-
-    .footer-tagline {
-      font-size: 0.7rem;
-      color: rgba(154,154,154,0.2);
-      letter-spacing: 0.08em;
-      margin-bottom: 1.2rem;
-    }
-
-    .footer-links a {
-      color: rgba(154,154,154,0.28);
-      text-decoration: none;
-      font-family: 'Montserrat', sans-serif;
-      font-size: 0.62rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      margin: 0 0.8rem;
-      transition: color 0.2s;
-    }
-
-    .footer-links a:hover { color: var(--copper); }
-
-    /* ─── ANIMATIONS ─── */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(22px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes pulse {
-      0%, 100% { opacity: 0.3; transform: translateX(-50%) scaleY(1); }
-      50%       { opacity: 0.8; transform: translateX(-50%) scaleY(1.1); }
-    }
-
-    /* ─── MOBILE ─── */
-    @media (max-width: 580px) {
-      nav { padding: 1rem 1.2rem; }
-      .wrap, .wrap--wide { padding: 4.5rem 1.4rem; }
-      .thesis-inner { padding: 4.5rem 1.4rem; }
-      .pillars { grid-template-columns: 1fr; }
-      .deliverables { grid-template-columns: 1fr; }
-      .deliverable:nth-child(5) { grid-column: auto; }
-      .guarantee-grid { grid-template-columns: 1fr; }
-      .deal-quote { padding: 1.8rem 1.5rem; }
-      .testimonial { padding: 2rem 1.5rem; }
-      footer { padding: 2rem 1.2rem; }
-    }
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>The Standard — Dylan Bucher</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500&family=Montserrat:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+--black: #0A0A0A;
+--charcoal: #161616;
+--graphite: #242424;
+--border: rgba(255,255,255,0.06);
+--silver: #9A9A9A;
+--white: #EFEFEF;
+--copper: #B87333;
+--copper-glow: rgba(184,115,51,0.12);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+background: var(--black);
+color: var(--white);
+font-family: 'DM Sans', sans-serif;
+font-weight: 300;
+line-height: 1.6;
+-webkit-font-smoothing: antialiased;
+overflow-x: hidden;
+}
+
+nav {
+position: fixed;
+top: 0; left: 0; right: 0;
+z-index: 100;
+padding: 1.2rem 2.5rem;
+display: flex;
+justify-content: space-between;
+align-items: center;
+background: rgba(10,10,10,0.95);
+backdrop-filter: blur(16px);
+-webkit-backdrop-filter: blur(16px);
+border-bottom: 1px solid var(--border);
+}
+
+.nav-logo {
+font-family: 'Montserrat', sans-serif;
+font-size: 0.65rem;
+font-weight: 700;
+letter-spacing: 0.25em;
+text-transform: uppercase;
+color: var(--white);
+text-decoration: none;
+}
+
+.nav-cta {
+font-family: 'Montserrat', sans-serif;
+font-size: 0.62rem;
+font-weight: 600;
+letter-spacing: 0.14em;
+text-transform: uppercase;
+color: var(--copper);
+text-decoration: none;
+border: 1px solid rgba(184,115,51,0.45);
+padding: 0.48rem 1.1rem;
+transition: all 0.22s;
+}
+
+.nav-cta:hover {
+background: var(--copper);
+color: var(--black);
+}
+
+.hero {
+min-height: 100svh;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+text-align: center;
+position: relative;
+overflow: hidden;
+padding: 6rem 2rem 4rem;
+background: var(--black);
+}
+
+.hero-glow {
+position: absolute;
+top: -20%;
+left: 50%;
+transform: translateX(-50%);
+width: 600px;
+height: 600px;
+background: radial-gradient(circle, rgba(184,115,51,0.07) 0%, transparent 65%);
+pointer-events: none;
+}
+
+.hero-content {
+position: relative;
+z-index: 2;
+max-width: 800px;
+width: 100%;
+}
+
+.hero-eyebrow {
+font-family: 'Montserrat', sans-serif;
+font-size: 0.62rem;
+font-weight: 600;
+letter-spacing: 0.35em;
+text-transform: uppercase;
+color: var(--copper);
+margin-bottom: 1.5rem;
+animation: fadeUp 0.8s 0.1s ease forwards;
+opacity: 0;
+}
+
+.hero h1 {
+font-family: 'Bebas Neue', sans-serif;
+font-size: clamp(5.5rem, 22vw, 14rem);
+font-weight: 400;
+line-height: 0.88;
+letter-spacing: 0.04em;
+color: var(--white);
+margin-bottom: 0;
+animation: fadeUp 0.8s 0.25s ease forwards;
+opacity: 0;
+}
+
+.hero-rule {
+display: flex;
+align-items: center;
+gap: 1rem;
+margin: 2rem auto;
+max-width: 320px;
+animation: fadeUp 0.8s 0.4s ease forwards;
+opacity: 0;
+}
+
+.hero-rule span {
+flex: 1;
+height: 1px;
+background: var(--border);
+}
+
+.hero-rule em {
+font-family: 'Cormorant Garamond', serif;
+font-style: italic;
+font-size: 0.9rem;
+color: var(--silver);
+white-space: nowrap;
+}
+
+.hero-sub {
+font-size: clamp(0.9rem, 1.8vw, 1rem);
+color: var(--silver);
+max-width: 420px;
+margin: 0 auto 3rem;
+line-height: 2;
+animation: fadeUp 0.8s 0.5s ease forwards;
+opacity: 0;
+}
+
+.hero-cta-group {
+display: flex;
+flex-direction: column;
+align-items: center;
+gap: 1.2rem;
+animation: fadeUp 0.8s 0.65s ease forwards;
+opacity: 0;
+}
+
+.btn-primary {
+display: inline-block;
+background: var(--copper);
+color: var(--black);
+font-family: 'Montserrat', sans-serif;
+font-weight: 700;
+font-size: 0.7rem;
+letter-spacing: 0.2em;
+text-transform: uppercase;
+text-decoration: none;
+padding: 1rem 2.8rem;
+transition: all 0.2s;
+}
+
+.btn-primary:hover {
+background: #c98843;
+transform: translateY(-2px);
+box-shadow: 0 10px 32px rgba(184,115,51,0.22);
+}
+
+.hero-note {
+font-size: 0.68rem;
+letter-spacing: 0.12em;
+color: rgba(154,154,154,0.4);
+text-transform: uppercase;
+font-family: 'Montserrat', sans-serif;
+}
+
+.hero-scroll-line {
+position: absolute;
+bottom: 2.5rem;
+left: 50%;
+transform: translateX(-50%);
+width: 1px;
+height: 50px;
+background: linear-gradient(to bottom, var(--copper), transparent);
+animation: fadeUp 0.8s 1s ease forwards, pulse 2.5s 1.5s ease-in-out infinite;
+opacity: 0;
+}
+
+.wrap {
+max-width: 700px;
+margin: 0 auto;
+padding: 6rem 2rem;
+}
+
+.wrap--wide {
+max-width: 820px;
+margin: 0 auto;
+padding: 6rem 2rem;
+}
+
+hr.div {
+border: none;
+border-top: 1px solid var(--border);
+margin: 0;
+}
+
+.label {
+font-family: 'Montserrat', sans-serif;
+font-size: 0.6rem;
+font-weight: 700;
+letter-spacing: 0.3em;
+text-transform: uppercase;
+color: var(--copper);
+margin-bottom: 1.2rem;
+}
+
+h2 {
+font-family: 'Cormorant Garamond', serif;
+font-size: clamp(2rem, 5vw, 3rem);
+font-weight: 700;
+color: var(--white);
+line-height: 1.15;
+margin-bottom: 1.4rem;
+}
+
+.accent { color: var(--copper); }
+
+p.body {
+font-size: 0.98rem;
+color: var(--silver);
+line-height: 1.95;
+margin-bottom: 1.2rem;
+}
+
+.story-bg { background: var(--charcoal); }
+
+.story-text {
+font-family: 'Cormorant Garamond', serif;
+font-size: clamp(1.1rem, 2.5vw, 1.3rem);
+color: rgba(239,239,239,0.82);
+line-height: 1.85;
+margin-bottom: 1.4rem;
+text-align: left;
+}
+
+.story-attr {
+font-family: 'Montserrat', sans-serif;
+font-size: 0.65rem;
+font-weight: 700;
+letter-spacing: 0.2em;
+text-transform: uppercase;
+color: var(--copper);
+margin-top: 2rem;
+text-align: left;
+}
+
+.pillars {
+display: grid;
+grid-template-columns: repeat(3, 1fr);
+gap: 1px;
+background: var(--border);
+margin-top: 3.5rem;
+}
+
+.pillar {
+background: var(--charcoal);
+padding: 2.5rem 1.8rem;
+transition: background 0.2s;
+}
+
+.pillar:hover { background: var(--graphite); }
+
+.pillar-num {
+font-family: 'Bebas Neue', sans-serif;
+font-size: 3rem;
+color: var(--copper);
+opacity: 0.2;
+line-height: 1;
+margin-bottom: 0.8rem;
+}
+
+.pillar-title {
+font-family: 'Montserrat', sans-serif;
+font-size: 0.62rem;
+font-weight: 700;
+letter-spacing: 0.2em;
+text-transform: uppercase;
+color: var(--white);
+margin-bottom: 0.8rem;
+}
+
+.pillar-body {
+font-size: 0.88rem;
+color: var(--silver);
+line-height: 1.75;
+}
+
+.thesis-bg {
+background: var(--graphite);
+position: relative;
+overflow: hidden;
+}
+
+.thesis-bg::before,
+.thesis-bg::after {
+content: '';
+position: absolute;
+left: 0; right: 0;
+height: 1px;
+}
+
+.thesis-bg::before {
+top: 0;
+background: linear-gradient(to right, transparent, var(--copper), transparent);
+}
+
+.thesis-bg::after {
+bottom: 0;
+background: linear-gradient(to right, transparent, rgba(184,115,51,0.3), transparent);
+}
+
+.thesis-inner {
+max-width: 700px;
+margin: 0 auto;
+padding: 6rem 2rem;
+text-align: center;
+}
+
+.thesis-main {
+font-family: 'Cormorant Garamond', serif;
+font-size: clamp(1.6rem, 4.5vw, 2.7rem);
+font-weight: 700;
+color: var(--white);
+line-height: 1.3;
+margin-bottom: 1.5rem;
+}
+
+.thesis-main em {
+color: var(--copper);
+font-style: italic;
+}
+
+.thesis-sub {
+font-family: 'DM Sans', sans-serif;
+font-size: 0.95rem;
+color: var(--silver);
+line-height: 1.9;
+max-width: 380px;
+margin: 0 auto;
+}
+
+.tags {
+display: flex;
+flex-wrap: wrap;
+gap: 0.5rem;
+justify-content: center;
+margin: 2.2rem 0 1.5rem;
+}
+
+.tag {
+font-family: 'Montserrat', sans-serif;
+font-size: 0.62rem;
+font-weight: 600;
+letter-spacing: 0.1em;
+text-transform: uppercase;
+border: 1px solid var(--graphite);
+color: var(--silver);
+padding: 0.45rem 0.9rem;
+transition: all 0.2s;
+}
+
+.tag:hover { border-color: var(--copper); color: var(--copper); }
+
+.not-for {
+font-size: 0.82rem;
+color: rgba(154,154,154,0.35);
+font-style: italic;
+}
+
+.deliverables {
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 1px;
+background: var(--border);
+margin-top: 3.5rem;
+text-align: left;
+}
+
+.deliverable {
+background: var(--charcoal);
+padding: 2.2rem;
+transition: background 0.2s;
+}
+
+.deliverable:hover { background: var(--graphite); }
+
+.deliverable:nth-child(5) {
+grid-column: 1 / -1;
+}
+
+.d-label {
+font-family: 'Montserrat', sans-serif;
+font-size: 0.58rem;
+font-weight: 700;
+letter-spacing: 0.22em;
+text-transform: uppercase;
+color: var(--copper);
+margin-bottom: 0.75rem;
+}
+
+.d-text {
+font-size: 0.9rem;
+color: var(--silver);
+line-height: 1.8;
+}
+
+.deal-bg { background: var(--black); }
+
+.deal-quote {
+margin: 3rem auto 0;
+max-width: 560px;
+padding: 2.5rem 2.5rem 2.5rem 2rem;
+border-left: 2px solid var(--copper);
+background: var(--charcoal);
+}
+
+.deal-quote p {
+font-family: 'Cormorant Garamond', serif;
+font-size: clamp(1.1rem, 2.5vw, 1.45rem);
+font-style: italic;
+color: var(--white);
+line-height: 1.75;
+}
+
+.deal-quote strong {
+font-style: normal;
+color: var(--copper);
+font-weight: 700;
+}
+
+.guarantee-bg { background: var(--charcoal); }
+
+.guarantee-grid {
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 1px;
+background: var(--border);
+margin-top: 3rem;
+text-align: left;
+}
+
+.g-card {
+background: var(--black);
+padding: 2.5rem 2rem;
+transition: background 0.2s;
+}
+
+.g-card:hover { background: var(--graphite); }
+
+.g-num {
+font-family: 'Bebas Neue', sans-serif;
+font-size: 3.5rem;
+color: var(--copper);
+opacity: 0.18;
+line-height: 1;
+margin-bottom: 1rem;
+}
+
+.g-title {
+font-family: 'Montserrat', sans-serif;
+font-size: 0.62rem;
+font-weight: 700;
+letter-spacing: 0.2em;
+text-transform: uppercase;
+color: var(--white);
+margin-bottom: 0.8rem;
+}
+
+.g-body {
+font-size: 0.9rem;
+color: var(--silver);
+line-height: 1.8;
+}
+
+.guarantee-note {
+font-size: 0.8rem;
+color: rgba(154,154,154,0.3);
+font-style: italic;
+margin-top: 2rem;
+text-align: center;
+}
+
+.proof-bg { background: var(--black); }
+
+.testimonial {
+margin: 4rem auto 0;
+max-width: 520px;
+background: var(--charcoal);
+border-top: 2px solid var(--copper);
+padding: 3rem 2.5rem 2.5rem;
+text-align: left;
+}
+
+.testimonial blockquote {
+font-family: 'Cormorant Garamond', serif;
+font-size: 1.25rem;
+font-style: italic;
+color: var(--white);
+line-height: 1.7;
+margin-bottom: 1.5rem;
+}
+
+.testimonial cite {
+font-family: 'Montserrat', sans-serif;
+font-size: 0.62rem;
+font-weight: 700;
+letter-spacing: 0.18em;
+text-transform: uppercase;
+color: var(--copper);
+font-style: normal;
+}
+
+.apply-bg {
+background: var(--charcoal);
+position: relative;
+overflow: hidden;
+}
+
+.apply-bg::before {
+content: '';
+position: absolute;
+inset: 0;
+background: radial-gradient(ellipse at 50% 0%, rgba(184,115,51,0.06) 0%, transparent 60%);
+pointer-events: none;
+}
+
+.apply-note {
+font-size: 0.72rem;
+color: rgba(154,154,154,0.28);
+margin-top: 1.4rem;
+font-style: italic;
+letter-spacing: 0.05em;
+}
+
+footer {
+background: #060606;
+padding: 2.5rem 2rem;
+text-align: center;
+border-top: 1px solid var(--border);
+}
+
+.footer-brand {
+font-family: 'Bebas Neue', sans-serif;
+font-size: 1.4rem;
+letter-spacing: 0.15em;
+color: var(--copper);
+margin-bottom: 0.6rem;
+opacity: 0.7;
+}
+
+.footer-tagline {
+font-size: 0.7rem;
+color: rgba(154,154,154,0.2);
+letter-spacing: 0.08em;
+margin-bottom: 1.2rem;
+}
+
+.footer-links a {
+color: rgba(154,154,154,0.28);
+text-decoration: none;
+font-family: 'Montserrat', sans-serif;
+font-size: 0.62rem;
+letter-spacing: 0.18em;
+text-transform: uppercase;
+margin: 0 0.8rem;
+transition: color 0.2s;
+}
+
+.footer-links a:hover { color: var(--copper); }
+
+@keyframes fadeUp {
+from { opacity: 0; transform: translateY(22px); }
+to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse {
+0%, 100% { opacity: 0.3; transform: translateX(-50%) scaleY(1); }
+50% { opacity: 0.8; transform: translateX(-50%) scaleY(1.1); }
+}
+
+@media (max-width: 580px) {
+nav { padding: 1rem 1.2rem; }
+.wrap, .wrap--wide { padding: 4.5rem 1.4rem; }
+.thesis-inner { padding: 4.5rem 1.4rem; }
+.pillars { grid-template-columns: 1fr; }
+.deliverables { grid-template-columns: 1fr; }
+.deliverable:nth-child(5) { grid-column: auto; }
+.guarantee-grid { grid-template-columns: 1fr; }
+.deal-quote { padding: 1.8rem 1.5rem; }
+.testimonial { padding: 2rem 1.5rem; }
+footer { padding: 2rem 1.2rem; }
+}
+</style>
 </head>
 <body>
 
-  <!-- NAV -->
-  <nav>
-    <a class="nav-logo" href="#">Dylan Bucher</a>
-    <a class="nav-cta" href="https://calendly.com/dylanbucherfitness/coaching-application" target="_blank">Apply Now</a>
-  </nav>
+<!-- NAV -->
+<nav>
+<a class="nav-logo" href="#">Dylan Bucher</a>
+<a class="nav-cta" href="apply.html">Apply Now</a>
+</nav>
 
-  <!-- HERO -->
-  <header class="hero">
-    <div class="hero-glow"></div>
-    <div class="hero-content">
-      <p class="hero-eyebrow">Dylan Bucher — 1:1 Coaching</p>
-      <h1>The Standard</h1>
-      <div class="hero-rule">
-        <span></span>
-        <em>built by nature. proven by work.</em>
-        <span></span>
-      </div>
-      <p class="hero-sub">The body affects the mind. The mind affects the body. We work on both. 4–5 hours a week — built around your life.</p>
-      <div class="hero-cta-group">
-        <a href="https://calendly.com/dylanbucherfitness/coaching-application" class="btn-primary" target="_blank">Book Your Free Consultation</a>
-        <span class="hero-note">One conversation. A clear plan. Zero pressure.</span>
-      </div>
-    </div>
-    <div class="hero-scroll-line"></div>
-  </header>
+<!-- HERO -->
+<header class="hero">
+<div class="hero-glow"></div>
+<div class="hero-content">
+<p class="hero-eyebrow">Dylan Bucher — 1:1 Coaching</p>
+<h1>The Standard</h1>
+<div class="hero-rule">
+<span></span>
+<em>built by nature. proven by work.</em>
+<span></span>
+</div>
+<p class="hero-sub">The body affects the mind. The mind affects the body. We work on both. 4–5 hours a week — built around your life.</p>
+<div class="hero-cta-group">
+<a href="apply.html" class="btn-primary">Book Your Free Consultation</a>
+<span class="hero-note">One conversation. A clear plan. Zero pressure.</span>
+</div>
+</div>
+<div class="hero-scroll-line"></div>
+</header>
 
-  <!-- STORY -->
-  <hr class="div">
-  <div class="story-bg">
-    <div class="wrap">
-      <p class="label">The story</p>
-      <p class="story-text">I was an athlete my whole life. The structure was built in — practice, competition, repeat. When sports ended and real life started, that structure disappeared. Work, school, responsibilities. The weight came on. The brain fog set in. The energy dropped.</p>
-      <p class="story-text">I didn't hire a coach. I built systems. I figured out how to train, eat, and stay sharp while working full time and going to school. I got my body back — not because I had more time, but because I stopped leaving fitness to chance.</p>
-      <p class="story-text">That's what The Standard is. Everything I learned, built into a program for you.</p>
-      <p class="story-attr">— Dylan Bucher</p>
-    </div>
-  </div>
+<!-- STORY -->
+<hr class="div">
+<div class="story-bg">
+<div class="wrap">
+<p class="label">The story</p>
+<p class="story-text">I was an athlete my whole life. The structure was built in — practice, competition, repeat. When sports ended and real life started, that structure disappeared. Work, school, responsibilities. The weight came on. The brain fog set in. The energy dropped.</p>
+<p class="story-text">I didn't hire a coach. I built systems. I figured out how to train, eat, and stay sharp while working full time and going to school. I got my body back — not because I had more time, but because I stopped leaving fitness to chance.</p>
+<p class="story-text">That's what The Standard is. Everything I learned, built into a program for you.</p>
+<p class="story-attr">— Dylan Bucher</p>
+</div>
+</div>
 
-  <!-- PHILOSOPHY -->
-  <hr class="div">
-  <div class="wrap--wide" style="padding-bottom: 0;">
-    <div style="text-align:center;">
-      <p class="label">The philosophy</p>
-      <h2>"You aren't incapable.<br>You're just <span class="accent">unorganized.</span>"</h2>
-      <p class="body" style="max-width:500px; margin:0 auto;">This isn't about the gym. It's about what training does to everything else — your energy, your clarity, your capacity to handle life. A hard life in a strong body is always easier.</p>
-    </div>
-    <div class="pillars">
-      <div class="pillar">
-        <div class="pillar-num">I</div>
-        <div class="pillar-title">Train the Body</div>
-        <p class="pillar-body">Strength, consistency, progressive work. 4–5 hours a week built around your actual schedule.</p>
-      </div>
-      <div class="pillar">
-        <div class="pillar-num">II</div>
-        <div class="pillar-title">Sharpen the Mind</div>
-        <p class="pillar-body">Discipline, structure, and the habits that carry into every other area of your life.</p>
-      </div>
-      <div class="pillar">
-        <div class="pillar-num">III</div>
-        <div class="pillar-title">Upgrade the Life</div>
-        <p class="pillar-body">Better energy. Clearer thinking. More capacity. Life doesn't get easier — you get more equipped.</p>
-      </div>
-    </div>
-  </div>
+<!-- PHILOSOPHY -->
+<hr class="div">
+<div class="wrap--wide" style="padding-bottom: 0;">
+<div style="text-align:center;">
+<p class="label">The philosophy</p>
+<h2>"You aren't incapable.<br>You're just <span class="accent">unorganized.</span>"</h2>
+<p class="body" style="max-width:500px; margin:0 auto;">This isn't about the gym. It's about what training does to everything else — your energy, your clarity, your capacity to handle life. A hard life in a strong body is always easier.</p>
+</div>
+<div class="pillars">
+<div class="pillar">
+<div class="pillar-num">I</div>
+<div class="pillar-title">Train the Body</div>
+<p class="pillar-body">Strength, consistency, progressive work. 4–5 hours a week built around your actual schedule.</p>
+</div>
+<div class="pillar">
+<div class="pillar-num">II</div>
+<div class="pillar-title">Sharpen the Mind</div>
+<p class="pillar-body">Discipline, structure, and the habits that carry into every other area of your life.</p>
+</div>
+<div class="pillar">
+<div class="pillar-num">III</div>
+<div class="pillar-title">Upgrade the Life</div>
+<p class="pillar-body">Better energy. Clearer thinking. More capacity. Life doesn't get easier — you get more equipped.</p>
+</div>
+</div>
+</div>
 
-  <!-- THESIS -->
-  <div class="thesis-bg">
-    <div class="thesis-inner">
-      <p class="thesis-main">The Standard isn't a workout plan.<br><em>It's a decision about who you are.</em></p>
-      <p class="thesis-sub">Life doesn't get easier. You get more equipped for it.</p>
-    </div>
-  </div>
+<!-- THESIS -->
+<div class="thesis-bg">
+<div class="thesis-inner">
+<p class="thesis-main">The Standard isn't a workout plan.<br><em>It's a decision about who you are.</em></p>
+<p class="thesis-sub">Life doesn't get easier. You get more equipped for it.</p>
+</div>
+</div>
 
-  <!-- FOR WHO -->
-  <hr class="div">
-  <div class="wrap" style="text-align:center;">
-    <p class="label">Who this is for</p>
-    <h2>The gym doesn't have to be<br>your <span class="accent">whole life.</span></h2>
-    <p class="body" style="max-width:480px; margin:0 auto;">You've got a business to run, a schedule to keep, a life to live. You don't need to become a gym rat. You need to show up on schedule — and everything else gets easier from there.</p>
-    <div class="tags">
-      <span class="tag">Entrepreneurs</span>
-      <span class="tag">CEOs</span>
-      <span class="tag">9-to-5 Workers</span>
-      <span class="tag">Professionals</span>
-      <span class="tag">Men with a full plate</span>
-    </div>
-    <p class="not-for">Not for excuse-makers. This only works if you do.</p>
-  </div>
+<!-- FOR WHO -->
+<hr class="div">
+<div class="wrap" style="text-align:center;">
+<p class="label">Who this is for</p>
+<h2>The gym doesn't have to be<br>your <span class="accent">whole life.</span></h2>
+<p class="body" style="max-width:480px; margin:0 auto;">You've got a business to run, a schedule to keep, a life to live. You don't need to become a gym rat. You need to show up on schedule — and everything else gets easier from there.</p>
+<div class="tags">
+<span class="tag">Entrepreneurs</span>
+<span class="tag">CEOs</span>
+<span class="tag">9-to-5 Workers</span>
+<span class="tag">Professionals</span>
+<span class="tag">Men with a full plate</span>
+</div>
+<p class="not-for">Not for excuse-makers. This only works if you do.</p>
+</div>
 
-  <!-- WHAT YOU GET -->
-  <hr class="div">
-  <div class="wrap--wide" style="text-align:center;">
-    <p class="label">What's included</p>
-    <h2>Everything you need.<br><span class="accent">Nothing you don't.</span></h2>
-    <p class="body" style="max-width:460px; margin:0 auto;">No cookie-cutter programs. Everything built around your schedule, your life, and your goal.</p>
-    <div class="deliverables">
-      <div class="deliverable">
-        <div class="d-label">Training</div>
-        <p class="d-text">A program built around your schedule. 4–5 hours a week. Structured, progressive, and designed to outlast our time together.</p>
-      </div>
-      <div class="deliverable">
-        <div class="d-label">Nutrition</div>
-        <p class="d-text">A plan that works with your real life. Balance is built in. You'll know what to eat, why it works, and how to sustain it on your own.</p>
-      </div>
-      <div class="deliverable">
-        <div class="d-label">2 Calls / Month</div>
-        <p class="d-text">Two dedicated phone calls every month. We review your progress, adjust the plan, and keep you moving in the right direction.</p>
-      </div>
-      <div class="deliverable">
-        <div class="d-label">Daily Support</div>
-        <p class="d-text">Direct message access every day. Questions, check-ins, adjustments. You're not figuring this out alone.</p>
-      </div>
-      <div class="deliverable">
-        <div class="d-label">The Skills</div>
-        <p class="d-text">The goal isn't dependency — it's capability. You leave this program knowing how to train, eat, and sustain it for life. With or without me.</p>
-      </div>
-    </div>
-  </div>
+<!-- WHAT YOU GET -->
+<hr class="div">
+<div class="wrap--wide" style="text-align:center;">
+<p class="label">What's included</p>
+<h2>Everything you need.<br><span class="accent">Nothing you don't.</span></h2>
+<p class="body" style="max-width:460px; margin:0 auto;">No cookie-cutter programs. Everything built around your schedule, your life, and your goal.</p>
+<div class="deliverables">
+<div class="deliverable">
+<div class="d-label">Training</div>
+<p class="d-text">A program built around your schedule. 4–5 hours a week. Structured, progressive, and designed to outlast our time together.</p>
+</div>
+<div class="deliverable">
+<div class="d-label">Nutrition</div>
+<p class="d-text">A plan that works with your real life. Balance is built in. You'll know what to eat, why it works, and how to sustain it on your own.</p>
+</div>
+<div class="deliverable">
+<div class="d-label">2 Calls / Month</div>
+<p class="d-text">Two dedicated phone calls every month. We review your progress, adjust the plan, and keep you moving in the right direction.</p>
+</div>
+<div class="deliverable">
+<div class="d-label">Daily Support</div>
+<p class="d-text">Direct message access every day. Questions, check-ins, adjustments. You're not figuring this out alone.</p>
+</div>
+<div class="deliverable">
+<div class="d-label">The Skills</div>
+<p class="d-text">The goal isn't dependency — it's capability. You leave this program knowing how to train, eat, and sustain it for life. With or without me.</p>
+</div>
+</div>
+</div>
 
-  <!-- THE DEAL -->
-  <hr class="div">
-  <div class="deal-bg">
-    <div class="wrap" style="text-align:center;">
-      <p class="label">The agreement</p>
-      <h2>How this <span class="accent">works.</span></h2>
-      <p class="body" style="max-width:460px; margin:0 auto;">This isn't a transaction. It's a working relationship. You bring the commitment. I bring the plan, the structure, and the accountability.</p>
-      <div class="deal-quote">
-        <p>"I'll work for you <strong>as hard as you work for yourself.</strong> You execute the plan, show up on schedule, and trust the process. I'll be in your corner every step of the way. This only works if we both do."</p>
-      </div>
-    </div>
-  </div>
+<!-- THE DEAL -->
+<hr class="div">
+<div class="deal-bg">
+<div class="wrap" style="text-align:center;">
+<p class="label">The agreement</p>
+<h2>How this <span class="accent">works.</span></h2>
+<p class="body" style="max-width:460px; margin:0 auto;">This isn't a transaction. It's a working relationship. You bring the commitment. I bring the plan, the structure, and the accountability.</p>
+<div class="deal-quote">
+<p>"I'll work for you <strong>as hard as you work for yourself.</strong> You execute the plan, show up on schedule, and trust the process. I'll be in your corner every step of the way. This only works if we both do."</p>
+</div>
+</div>
+</div>
 
-  <!-- GUARANTEE -->
-  <hr class="div">
-  <div class="guarantee-bg">
-    <div class="wrap--wide" style="text-align:center;">
-      <p class="label">The guarantee</p>
-      <h2>I put skin <span class="accent">in the game.</span></h2>
-      <p class="body" style="max-width:520px; margin:0 auto;">On day one we set a specific, realistic goal together. If you meet every requirement — 90% of sessions completed, Trainerize check-ins logged, nutrition tracked, both monthly calls attended — and still fall short at the end of your term:</p>
-      <div class="guarantee-grid">
-        <div class="g-card">
-          <div class="g-num">01</div>
-          <div class="g-title">Extended Coaching</div>
-          <p class="g-body">I keep working with you at no extra cost until we reach the goal we set on day one. No questions asked.</p>
-        </div>
-        <div class="g-card">
-          <div class="g-num">02</div>
-          <div class="g-title">Full Refund</div>
-          <p class="g-body">If extended coaching still doesn't get us there, you get every dollar back. That's the Standard guarantee.</p>
-        </div>
-      </div>
-      <p class="guarantee-note">This guarantee exists because I'm confident in the program and committed to your results. The only requirement is that you do the work.</p>
-    </div>
-  </div>
+<!-- GUARANTEE -->
+<hr class="div">
+<div class="guarantee-bg">
+<div class="wrap--wide" style="text-align:center;">
+<p class="label">The guarantee</p>
+<h2>I put skin <span class="accent">in the game.</span></h2>
+<p class="body" style="max-width:520px; margin:0 auto;">On day one we set a specific, realistic goal together. If you meet every requirement — 90% of sessions completed, Trainerize check-ins logged, nutrition tracked, both monthly calls attended — and still fall short at the end of your term:</p>
+<div class="guarantee-grid">
+<div class="g-card">
+<div class="g-num">01</div>
+<div class="g-title">Extended Coaching</div>
+<p class="g-body">I keep working with you at no extra cost until we reach the goal we set on day one. No questions asked.</p>
+</div>
+<div class="g-card">
+<div class="g-num">02</div>
+<div class="g-title">Full Refund</div>
+<p class="g-body">If extended coaching still doesn't get us there, you get every dollar back. That's the Standard guarantee.</p>
+</div>
+</div>
+<p class="guarantee-note">This guarantee exists because I'm confident in the program and committed to your results. The only requirement is that you do the work.</p>
+</div>
+</div>
 
-  <!-- PROOF -->
-  <hr class="div">
-  <div class="proof-bg">
-    <div class="wrap" style="text-align:center;">
-      <p class="label">Proof</p>
-      <h2>It works when <span class="accent">you work.</span></h2>
-      <p class="body" style="max-width:460px; margin:0 auto;">Claudio is a dentist. Monday through Friday, 7 to 5. A full schedule and a full life. He followed the plan anyway — and got his body and his energy back.</p>
-      <div class="testimonial">
-        <blockquote>"I didn't think I had the time. Turns out I just didn't have the structure."</blockquote>
-        <cite>Claudio — Dentist, The Standard</cite>
-      </div>
-    </div>
-  </div>
+<!-- PROOF -->
+<hr class="div">
+<div class="proof-bg">
+<div class="wrap" style="text-align:center;">
+<p class="label">Proof</p>
+<h2>It works when <span class="accent">you work.</span></h2>
+<p class="body" style="max-width:460px; margin:0 auto;">Claudio is a dentist. Monday through Friday, 7 to 5. A full schedule and a full life. He followed the plan anyway — and got his body and his energy back.</p>
+<div class="testimonial">
+<blockquote>"I didn't think I had the time. Turns out I just didn't have the structure."</blockquote>
+<cite>Claudio — Dentist, The Standard</cite>
+</div>
+</div>
+</div>
 
-  <!-- APPLY -->
-  <hr class="div">
-  <div class="apply-bg">
-    <div class="wrap" style="text-align:center; position:relative; z-index:1;">
-      <p class="label">Ready to apply</p>
-      <h2>The Standard isn't <span class="accent">for everyone.</span></h2>
-      <p class="body" style="max-width:440px; margin:0 auto 2.5rem;">Book a free consultation. We'll talk about where you are, where you want to go, and whether this is the right fit. If it makes sense for both of us, we get to work.</p>
-      <a href="https://calendly.com/dylanbucherfitness/coaching-application" class="btn-primary" target="_blank">Book Your Free Consultation</a>
-      <p class="apply-note">One conversation. A clear plan. Zero pressure.</p>
-    </div>
-  </div>
+<!-- APPLY -->
+<hr class="div">
+<div class="apply-bg">
+<div class="wrap" style="text-align:center; position:relative; z-index:1;">
+<p class="label">Ready to apply</p>
+<h2>The Standard isn't <span class="accent">for everyone.</span></h2>
+<p class="body" style="max-width:440px; margin:0 auto 2.5rem;">Book a free consultation. We'll talk about where you are, where you want to go, and whether this is the right fit. If it makes sense for both of us, we get to work.</p>
+<a href="apply.html" class="btn-primary">Book Your Free Consultation</a>
+<p class="apply-note">One conversation. A clear plan. Zero pressure.</p>
+</div>
+</div>
 
-  <!-- FOOTER -->
-  <footer>
-    <p class="footer-brand">THE STANDARD</p>
-    <p class="footer-tagline">Built by nature. Proven by work.</p>
-    <div class="footer-links">
-      <a href="https://www.instagram.com/dybuc/" target="_blank">@dybuc</a>
-      <a href="https://bio.site/dybuc" target="_blank">bio.site/dybuc</a>
-    </div>
-  </footer>
+<!-- FOOTER -->
+<footer>
+<p class="footer-brand">THE STANDARD</p>
+<p class="footer-tagline">Built by nature. Proven by work.</p>
+<div class="footer-links">
+<a href="https://www.instagram.com/dybuc/" target="_blank">@dybuc</a>
+<a href="https://bio.site/dybuc" target="_blank">bio.site/dybuc</a>
+</div>
+</footer>
 
 </body>
 </html>
