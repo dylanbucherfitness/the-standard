@@ -3,259 +3,1191 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Free Guide | The Standard — Dylan Bucher</title>
+<title>GROUNDWORK — 21 Day Bodyweight Program | Dylan Bucher</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500&family=Montserrat:wght@500;600;700&display=swap" rel="stylesheet">
 <script id="mcjs">!function(c,h,i,m,p){m=c.createElement(h),p=c.getElementsByTagName(h)[0],m.async=1,m.src=i,p.parentNode.insertBefore(m,p)}(document,"script","https://chimpstatic.com/mcjs-connected/js/users/85413e3dca6f9d78d329c3069/6fb65a982ece64d7241ab0c1c.js");</script>
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 :root {
---black: #0A0A0A;
---charcoal: #161616;
---graphite: #242424;
---border: rgba(255,255,255,0.06);
---silver: #9A9A9A;
---white: #EFEFEF;
---copper: #B87333;
---copper-glow: rgba(184,115,51,0.12);
+  --black: #0A0A0A;
+  --charcoal: #161616;
+  --graphite: #242424;
+  --border: rgba(255,255,255,0.06);
+  --silver: #9A9A9A;
+  --white: #EFEFEF;
+  --copper: #B87333;
 }
 html { scroll-behavior: smooth; }
 body {
-background: var(--black);
-color: var(--white);
-font-family: 'DM Sans', sans-serif;
-font-weight: 300;
-line-height: 1.6;
--webkit-font-smoothing: antialiased;
-overflow-x: hidden;
-min-height: 100svh;
+  background: var(--black);
+  color: var(--white);
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 300;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
 }
+
+/* NAV */
 nav {
-position: fixed;
-top: 0; left: 0; right: 0;
-z-index: 100;
-padding: 1.2rem 2.5rem;
-display: flex;
-justify-content: space-between;
-align-items: center;
-background: rgba(10,10,10,0.95);
-backdrop-filter: blur(16px);
--webkit-backdrop-filter: blur(16px);
-border-bottom: 1px solid var(--border);
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 1.2rem 2.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(10,10,10,0.95);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
 }
 .nav-logo {
-font-family: 'Montserrat', sans-serif;
-font-size: 0.65rem;
-font-weight: 700;
-letter-spacing: 0.25em;
-text-transform: uppercase;
-color: var(--white);
-text-decoration: none;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--white);
+  text-decoration: none;
 }
 .nav-cta {
-font-family: 'Montserrat', sans-serif;
-font-size: 0.62rem;
-font-weight: 600;
-letter-spacing: 0.14em;
-text-transform: uppercase;
-color: var(--copper);
-text-decoration: none;
-border: 1px solid rgba(184,115,51,0.45);
-padding: 0.48rem 1.1rem;
-transition: all 0.22s;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--copper);
+  text-decoration: none;
+  border: 1px solid rgba(184,115,51,0.45);
+  padding: 0.48rem 1.1rem;
+  transition: all 0.22s;
 }
-.nav-cta:hover {
-background: var(--copper);
-color: var(--black);
-}
+.nav-cta:hover { background: var(--copper); color: var(--black); }
+
+/* HERO */
 .hero {
-min-height: 100svh;
-display: flex;
-flex-direction: column;
-align-items: center;
-justify-content: center;
-text-align: center;
-position: relative;
-overflow: hidden;
-padding: 6rem 2rem 4rem;
-background: var(--black);
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  padding: 6rem 2rem 4rem;
+  background: var(--black);
 }
 .hero-glow {
-position: absolute;
-top: -20%;
-left: 50%;
-transform: translateX(-50%);
-width: 600px;
-height: 600px;
-background: radial-gradient(circle, rgba(184,115,51,0.07) 0%, transparent 65%);
-pointer-events: none;
+  position: absolute;
+  top: -10%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 700px;
+  height: 700px;
+  background: radial-gradient(circle, rgba(184,115,51,0.06) 0%, transparent 65%);
+  pointer-events: none;
 }
 .hero-content {
-position: relative;
-z-index: 2;
-max-width: 560px;
-width: 100%;
+  position: relative;
+  z-index: 2;
+  max-width: 700px;
 }
-.hero-eyebrow {
-font-family: 'Montserrat', sans-serif;
-font-size: 0.62rem;
-font-weight: 600;
-letter-spacing: 0.35em;
-text-transform: uppercase;
-color: var(--copper);
-margin-bottom: 1.5rem;
+.eyebrow {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--copper);
+  margin-bottom: 1.2rem;
 }
 .hero h1 {
-font-family: 'Bebas Neue', sans-serif;
-font-size: clamp(2.8rem, 9vw, 4.6rem);
-font-weight: 400;
-line-height: 1;
-letter-spacing: 0.02em;
-color: var(--white);
-margin-bottom: 0;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(5rem, 20vw, 12rem);
+  line-height: 0.88;
+  letter-spacing: 0.04em;
+  color: var(--white);
+  margin-bottom: 0;
 }
-.hero-rule {
-display: flex;
-align-items: center;
-gap: 1rem;
-margin: 2rem auto;
-max-width: 360px;
+.hero-sub-headline {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(1.4rem, 4vw, 2.2rem);
+  letter-spacing: 0.12em;
+  color: var(--copper);
+  margin-top: 0.4rem;
 }
-.hero-rule span { flex: 1; height: 1px; background: var(--border); }
-.hero-rule em {
-font-family: 'Cormorant Garamond', serif;
-font-style: italic;
-font-size: 0.9rem;
-color: var(--silver);
-white-space: nowrap;
+.rule {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 2rem auto;
+  max-width: 380px;
 }
-.hero-sub {
-font-size: clamp(0.9rem, 1.8vw, 1rem);
-color: var(--silver);
-max-width: 440px;
-margin: 0 auto 3rem;
-line-height: 2;
+.rule span { flex: 1; height: 1px; background: var(--border); }
+.rule em {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 0.9rem;
+  color: var(--silver);
+  white-space: nowrap;
 }
-.hero-cta-group {
-display: flex;
-flex-direction: column;
-align-items: center;
-gap: 1.2rem;
+.hero-desc {
+  font-size: 1rem;
+  color: var(--silver);
+  max-width: 460px;
+  margin: 0 auto 2.5rem;
+  line-height: 2;
 }
-.email-form { width: 100%; max-width: 440px; }
-.email-form-row {
-display: flex;
-gap: 0.7rem;
-}
-.email-input {
-flex: 1;
-width: 100%;
-background: var(--charcoal);
-border: 1px solid var(--border);
-color: var(--white);
-font-family: 'DM Sans', sans-serif;
-font-size: 0.92rem;
-padding: 1.05rem 1.2rem;
-outline: none;
-transition: border-color 0.2s;
-}
-.email-input::placeholder { color: rgba(154,154,154,0.55); }
-.email-input:focus { border-color: var(--copper); }
 .btn-primary {
-display: inline-block;
-background: var(--copper);
-color: var(--black);
-font-family: 'Montserrat', sans-serif;
-font-weight: 700;
-font-size: 0.7rem;
-letter-spacing: 0.2em;
-text-transform: uppercase;
-text-decoration: none;
-border: none;
-cursor: pointer;
-padding: 1.05rem 2.4rem;
-transition: all 0.2s;
-white-space: nowrap;
+  display: inline-block;
+  background: var(--copper);
+  color: var(--black);
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 1rem 2.8rem;
+  transition: all 0.2s;
+  cursor: pointer;
+  border: none;
 }
 .btn-primary:hover {
-background: #c98843;
-transform: translateY(-2px);
-box-shadow: 0 10px 32px rgba(184,115,51,0.22);
+  background: #c98843;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 32px rgba(184,115,51,0.22);
 }
-.hero-note {
-font-size: 0.68rem;
-letter-spacing: 0.12em;
-color: rgba(154,154,154,0.4);
-text-transform: uppercase;
-font-family: 'Montserrat', sans-serif;
+.hero-meta {
+  display: flex;
+  justify-content: center;
+  gap: 2.5rem;
+  margin-top: 2.5rem;
+  flex-wrap: wrap;
 }
+.meta-item {
+  text-align: center;
+}
+.meta-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2.2rem;
+  color: var(--copper);
+  line-height: 1;
+}
+.meta-label {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.58rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--silver);
+  margin-top: 0.3rem;
+}
+
+/* SECTION LAYOUT */
+hr.div {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 0;
+}
+.wrap {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 5rem 2rem;
+}
+.wrap--wide {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 5rem 2rem;
+}
+.section-label {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--copper);
+  margin-bottom: 1.2rem;
+}
+h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.8rem, 4.5vw, 2.8rem);
+  font-weight: 700;
+  color: var(--white);
+  line-height: 1.15;
+  margin-bottom: 1.2rem;
+}
+.accent { color: var(--copper); }
+p.body-text {
+  font-size: 0.98rem;
+  color: var(--silver);
+  line-height: 1.95;
+  margin-bottom: 1.2rem;
+}
+
+/* PHILOSOPHY */
+.philosophy-bg { background: var(--charcoal); }
+.philosophy-quote {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+  color: rgba(239,239,239,0.85);
+  line-height: 1.8;
+  margin-bottom: 1.4rem;
+}
+.philosophy-rule {
+  border-left: 2px solid var(--copper);
+  padding-left: 1.5rem;
+  margin: 2rem 0;
+}
+
+/* EQUIPMENT */
+.equipment-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: var(--border);
+  margin-top: 2.5rem;
+}
+.eq-card {
+  background: var(--charcoal);
+  padding: 2rem 1.8rem;
+}
+.eq-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--copper);
+  margin-bottom: 0.8rem;
+}
+.eq-main {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.6rem;
+  letter-spacing: 0.05em;
+  color: var(--white);
+  margin-bottom: 0.5rem;
+}
+.eq-mod {
+  font-size: 0.85rem;
+  color: var(--silver);
+  line-height: 1.6;
+}
+
+/* WEEK STRUCTURE */
+.weeks-bg { background: var(--graphite); position: relative; overflow: hidden; }
+.weeks-bg::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--copper), transparent);
+}
+.weeks-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--border);
+  margin-top: 2.5rem;
+}
+.week-card {
+  background: var(--charcoal);
+  padding: 2rem 1.6rem;
+}
+.week-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 3rem;
+  color: var(--copper);
+  opacity: 0.2;
+  line-height: 1;
+  margin-bottom: 0.6rem;
+}
+.week-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--white);
+  margin-bottom: 0.7rem;
+}
+.week-desc {
+  font-size: 0.87rem;
+  color: var(--silver);
+  line-height: 1.7;
+}
+
+/* WORKOUTS */
+.workouts-section { background: var(--black); }
+.week-block {
+  margin-bottom: 3rem;
+}
+.week-block-header {
+  display: flex;
+  align-items: baseline;
+  gap: 1.2rem;
+  margin-bottom: 1.2rem;
+  padding-bottom: 0.8rem;
+  border-bottom: 1px solid var(--border);
+}
+.week-block-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 0.85rem;
+  letter-spacing: 0.2em;
+  color: var(--copper);
+}
+.week-block-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.8rem;
+  letter-spacing: 0.06em;
+  color: var(--white);
+}
+.week-block-theme {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 0.95rem;
+  color: var(--silver);
+  margin-left: auto;
+}
+
+/* DAY ACCORDION */
+.day-card {
+  border: 1px solid var(--border);
+  margin-bottom: 0.5rem;
+  background: var(--charcoal);
+  transition: background 0.2s;
+}
+.day-card.is-open { background: var(--graphite); }
+.day-toggle {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.2rem 1.5rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  color: var(--white);
+}
+.day-tag {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.55rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--copper);
+  white-space: nowrap;
+}
+.day-name {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--white);
+  flex: 1;
+}
+.day-duration {
+  font-size: 0.78rem;
+  color: rgba(154,154,154,0.4);
+  white-space: nowrap;
+}
+.day-chevron {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.1rem;
+  color: var(--copper);
+  font-weight: 300;
+  transition: transform 0.2s;
+  min-width: 16px;
+  text-align: center;
+}
+.day-card.is-open .day-chevron { transform: rotate(45deg); }
+.day-content {
+  display: none;
+  padding: 0 1.5rem 1.5rem;
+}
+.day-card.is-open .day-content { display: block; }
+.day-focus {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 0.92rem;
+  color: rgba(184,115,51,0.8);
+  margin-bottom: 1.2rem;
+  padding-bottom: 0.8rem;
+  border-bottom: 1px solid var(--border);
+}
+.workout-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1.2rem;
+}
+.workout-table th {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.55rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--silver);
+  text-align: left;
+  padding: 0.5rem 0.75rem 0.5rem 0;
+  border-bottom: 1px solid var(--border);
+}
+.workout-table td {
+  font-size: 0.88rem;
+  color: var(--white);
+  padding: 0.7rem 0.75rem 0.7rem 0;
+  border-bottom: 1px solid rgba(255,255,255,0.03);
+  vertical-align: top;
+}
+.workout-table td:first-child { font-weight: 400; }
+.workout-table td .note {
+  font-size: 0.75rem;
+  color: var(--silver);
+  display: block;
+  margin-top: 0.2rem;
+}
+.workout-table td.sets, .workout-table td.reps, .workout-table td.rest {
+  color: var(--copper);
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.mod-box {
+  background: rgba(184,115,51,0.05);
+  border-left: 2px solid rgba(184,115,51,0.3);
+  padding: 0.9rem 1.1rem;
+  margin-top: 1rem;
+}
+.mod-box p {
+  font-size: 0.82rem;
+  color: var(--silver);
+  line-height: 1.6;
+}
+.mod-box strong {
+  color: var(--copper);
+  font-weight: 600;
+}
+
+/* ACTIVE CHALLENGE */
+.challenge-bg { background: var(--charcoal); }
+.challenge-options {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--border);
+  margin-top: 2.5rem;
+}
+.challenge-card {
+  background: var(--black);
+  padding: 1.8rem 1.5rem;
+}
+.challenge-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--copper);
+  margin-bottom: 0.8rem;
+}
+.challenge-body {
+  font-size: 0.87rem;
+  color: var(--silver);
+  line-height: 1.7;
+}
+
+/* RULES */
+.rules-bg { background: var(--graphite); }
+.rules-list {
+  margin-top: 2rem;
+  list-style: none;
+}
+.rules-list li {
+  display: flex;
+  gap: 1.2rem;
+  padding: 1.2rem 0;
+  border-bottom: 1px solid var(--border);
+  align-items: flex-start;
+}
+.rule-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.4rem;
+  color: var(--copper);
+  opacity: 0.35;
+  line-height: 1;
+  min-width: 28px;
+}
+.rule-text {
+  font-size: 0.92rem;
+  color: var(--silver);
+  line-height: 1.75;
+}
+.rule-text strong { color: var(--white); font-weight: 500; }
+
+/* LOG */
+.log-bg { background: var(--black); }
+.log-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: var(--border);
+  margin-top: 2rem;
+}
+.log-card {
+  background: var(--charcoal);
+  padding: 1.5rem 1.2rem;
+  text-align: center;
+}
+.log-label {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.55rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--silver);
+  margin-bottom: 0.8rem;
+}
+.log-blank {
+  height: 1px;
+  background: var(--copper);
+  opacity: 0.3;
+  margin: 0.6rem auto;
+  width: 80%;
+}
+
+/* CTA */
+.cta-bg {
+  background: var(--charcoal);
+  position: relative;
+  overflow: hidden;
+}
+.cta-bg::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 0%, rgba(184,115,51,0.06) 0%, transparent 60%);
+  pointer-events: none;
+}
+.cta-inner {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+}
+.cta-note {
+  font-size: 0.72rem;
+  color: rgba(154,154,154,0.3);
+  margin-top: 1.2rem;
+  font-style: italic;
+}
+
+/* FOOTER */
 footer {
-background: #060606;
-padding: 2.5rem 2rem;
-text-align: center;
-border-top: 1px solid var(--border);
+  background: #060606;
+  padding: 2.5rem 2rem;
+  text-align: center;
+  border-top: 1px solid var(--border);
 }
 .footer-brand {
-font-family: 'Bebas Neue', sans-serif;
-font-size: 1.4rem;
-letter-spacing: 0.15em;
-color: var(--copper);
-margin-bottom: 0.6rem;
-opacity: 0.7;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.4rem;
+  letter-spacing: 0.15em;
+  color: var(--copper);
+  margin-bottom: 0.6rem;
+  opacity: 0.7;
 }
 .footer-tagline {
-font-size: 0.7rem;
-color: rgba(154,154,154,0.2);
-letter-spacing: 0.08em;
-margin-bottom: 1.2rem;
+  font-size: 0.7rem;
+  color: rgba(154,154,154,0.2);
+  letter-spacing: 0.08em;
+  margin-bottom: 1.2rem;
 }
 .footer-links a {
-color: rgba(154,154,154,0.28);
-text-decoration: none;
-font-family: 'Montserrat', sans-serif;
-font-size: 0.62rem;
-letter-spacing: 0.18em;
-text-transform: uppercase;
-margin: 0 0.8rem;
-transition: color 0.2s;
+  color: rgba(154,154,154,0.28);
+  text-decoration: none;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.62rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin: 0 0.8rem;
+  transition: color 0.2s;
 }
 .footer-links a:hover { color: var(--copper); }
-@media (max-width: 580px) {
-nav { padding: 1rem 1.2rem; }
-.email-form-row { flex-direction: column; }
-footer { padding: 2rem 1.2rem; }
+
+/* MOBILE */
+@media (max-width: 600px) {
+  nav { padding: 1rem 1.2rem; }
+  .wrap, .wrap--wide { padding: 3.5rem 1.3rem; }
+  .equipment-grid { grid-template-columns: 1fr; }
+  .weeks-grid { grid-template-columns: 1fr; }
+  .challenge-options { grid-template-columns: 1fr; }
+  .log-grid { grid-template-columns: 1fr 1fr; }
+  .week-block-theme { display: none; }
+  footer { padding: 2rem 1.2rem; }
 }
 </style>
 </head>
 <body>
+
+<!-- NAV -->
 <nav>
-<a class="nav-logo" href="https://dylanbucherfitness.github.io/the-standard/">Dylan Bucher</a>
-<a class="nav-cta" href="https://dylanbucherfitness.github.io/the-standard/">1:1 Coaching →</a>
+  <a class="nav-logo" href="https://dylanbucherfitness.github.io/the-standard/">Dylan Bucher</a>
+  <a class="nav-cta" href="https://dylanbucherfitness.github.io/the-standard/apply.html">Apply for Coaching</a>
 </nav>
+
+<!-- HERO -->
 <header class="hero">
-<div class="hero-glow"></div>
-<div class="hero-content">
-<p class="hero-eyebrow">Free Resource — The Standard</p>
-<h1>Get Your Structure Back.</h1>
-<div class="hero-rule">
-<span></span>
-<em>you had it once. take it back.</em>
-<span></span>
-</div>
-<p class="hero-sub">A free training &amp; discipline guide for men who had an athletic background — and fell off. This is the starting point to get it back.</p>
-<div class="hero-cta-group">
-<a class="btn-primary" href="https://dybuc.gumroad.com/l/prvinw" target="_blank" rel="noopener">Get The Free Guide</a>
-<span class="hero-note">Free. Instant download. No catch.</span>
-</div>
-</div>
+  <div class="hero-glow"></div>
+  <div class="hero-content">
+    <p class="eyebrow">Free Program — Dylan Bucher</p>
+    <h1>GROUND<br>WORK</h1>
+    <p class="hero-sub-headline">21 Days. Bodyweight. No excuses.</p>
+    <div class="rule">
+      <span></span>
+      <em>get back in contact with your body.</em>
+      <span></span>
+    </div>
+    <p class="hero-desc">A real training program you can take anywhere and execute. No gym. No machines. Just you, the ground, and a pull-up bar — and the discipline to show up.</p>
+    <a class="btn-primary" href="#week1">Start Week 1</a>
+    <div class="hero-meta">
+      <div class="meta-item">
+        <div class="meta-num">21</div>
+        <div class="meta-label">Days</div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-num">4</div>
+        <div class="meta-label">Days / Week</div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-num">0</div>
+        <div class="meta-label">Excuses</div>
+      </div>
+    </div>
+  </div>
 </header>
-<footer>
-<p class="footer-brand">THE STANDARD</p>
-<p class="footer-tagline">Built by nature. Proven by work.</p>
-<div class="footer-links">
-<a href="https://www.instagram.com/dybuc/" target="_blank">@dybuc</a>
-  <a href="https://bio.site/dybuc" target="_blank">More Links</a>
+
+<!-- PHILOSOPHY -->
+<hr class="div">
+<div class="philosophy-bg">
+  <div class="wrap">
+    <p class="section-label">The premise</p>
+    <h2>The problem isn't your body.<br>It's that you've <span class="accent">stopped listening to it.</span></h2>
+    <div class="philosophy-rule">
+      <p class="philosophy-quote">No matter the discipline — you need to understand what you're working with in order to work it. This program is about rebuilding that contact. Feeling where strength is. Identifying where weakness lives. Learning to self-diagnose and self-correct.</p>
+    </div>
+    <p class="body-text">Push-ups, pull-ups, squats, dips. These aren't beginner movements. They're honest ones. They tell you exactly where you are. There's nowhere to hide with bodyweight — you either can or you can't, and the gap between those two things is just work.</p>
+    <p class="body-text">The quiet premise of this program: <strong style="color:var(--white);">quit bitching and get to work.</strong> Simple solutions. Real proof. That's all this is.</p>
+  </div>
 </div>
-  </footer>
+
+<!-- EQUIPMENT -->
+<hr class="div">
+<div class="wrap--wide">
+  <p class="section-label">What you need</p>
+  <h2>Two things. <span class="accent">Everything else has a workaround.</span></h2>
+  <div class="equipment-grid">
+    <div class="eq-card">
+      <div class="eq-title">Equipment</div>
+      <div class="eq-main">Pull-up Bar</div>
+      <p class="eq-mod">Doorframe mount, outdoor bar, or any overhead surface you can hang from safely.</p>
+    </div>
+    <div class="eq-card">
+      <div class="eq-title">Equipment</div>
+      <div class="eq-main">Dip Bar or Bench</div>
+      <p class="eq-mod">Parallel bars or the edge of a sturdy chair or bench. Anything stable at hip height.</p>
+    </div>
+    <div class="eq-card">
+      <div class="eq-title">Modification</div>
+      <div class="eq-main">No Pull-up Bar?</div>
+      <p class="eq-mod">Use a sturdy table for inverted rows. Slide under, grab the edge, pull your chest to it.</p>
+    </div>
+    <div class="eq-card">
+      <div class="eq-title">Modification</div>
+      <div class="eq-main">No Dip Bar?</div>
+      <p class="eq-mod">Bench dips: hands behind you on a chair, feet on the floor or elevated. Same movement pattern.</p>
+    </div>
+  </div>
+</div>
+
+<!-- WEEK OVERVIEW -->
+<hr class="div">
+<div class="weeks-bg">
+  <div class="wrap--wide" style="text-align:center;">
+    <p class="section-label">Program structure</p>
+    <h2>Three weeks. One direction. <span class="accent">Forward.</span></h2>
+    <p class="body-text" style="max-width:480px;margin:0 auto;">Each week builds on the last. Write your numbers down every session. That data is yours — it's how you measure growth and learn what your body needs.</p>
+    <div class="weeks-grid">
+      <div class="week-card">
+        <div class="week-num">01</div>
+        <div class="week-title">Establish</div>
+        <p class="week-desc">Learn your baseline. Find your numbers. Don't go to failure yet — learn what each movement feels like when it's done right.</p>
+      </div>
+      <div class="week-card">
+        <div class="week-num">02</div>
+        <div class="week-title">Build</div>
+        <p class="week-desc">Add volume. Push past comfortable. You've had a week to learn the movements — now use them. This week exposes the gaps.</p>
+      </div>
+      <div class="week-card">
+        <div class="week-num">03</div>
+        <div class="week-title">Prove</div>
+        <p class="week-desc">Max effort. Test yourself against Day 1. The difference between who you were and who you are right now — that's the work.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- WORKOUTS -->
+<hr class="div">
+<div class="workouts-section">
+<div class="wrap--wide">
+  <p class="section-label">The program</p>
+  <h2>Your workouts. <span class="accent">Every session.</span></h2>
+  <p class="body-text" style="max-width:500px;">4 training days per week. Tap each day to expand. Write your reps after every set — you'll need those numbers in Week 3.</p>
+
+  <!-- WEEK 1 -->
+  <div class="week-block" id="week1">
+    <div class="week-block-header">
+      <span class="week-block-num">Week 01</span>
+      <span class="week-block-title">Establish</span>
+      <span class="week-block-theme">Learn your body.</span>
+    </div>
+
+    <div class="day-card">
+      <button class="day-toggle" onclick="toggleDay(this)">
+        <span class="day-tag">Day 1</span>
+        <span class="day-name">Push</span>
+        <span class="day-duration">~35 min</span>
+        <span class="day-chevron">+</span>
+      </button>
+      <div class="day-content">
+        <p class="day-focus">Focus: find your push baseline. Control every rep. Slow the descent.</p>
+        <table class="workout-table">
+          <thead><tr><th>Exercise</th><th>Sets</th><th class="reps">Reps</th><th>Rest</th></tr></thead>
+          <tbody>
+            <tr><td>Push-ups<span class="note">Full range — chest to floor, arms fully extended</span></td><td>3</td><td class="reps">10</td><td>60s</td></tr>
+            <tr><td>Wide Push-ups<span class="note">Hands outside shoulder width — more chest activation</span></td><td>3</td><td class="reps">8</td><td>60s</td></tr>
+            <tr><td>Pike Push-ups<span class="note">Hips high, head toward floor — shoulder focus</span></td><td>3</td><td class="reps">8</td><td>60s</td></tr>
+            <tr><td>Dips / Bench Dips<span class="note">Lean forward slightly for chest, upright for triceps</span></td><td>3</td><td class="reps">8</td><td>60s</td></tr>
+            <tr><td>Diamond Push-ups<span class="note">Hands form a triangle under chest — tricep isolation</span></td><td>2</td><td class="reps">8</td><td>60s</td></tr>
+          </tbody>
+        </table>
+        <div class="mod-box">
+          <p><strong>Write it down:</strong> Log your actual reps for every set. If you hit more than prescribed, write the real number. That's your Week 3 baseline.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="day-card">
+      <button class="day-toggle" onclick="toggleDay(this)">
+        <span class="day-tag">Day 2</span>
+        <span class="day-name">Pull</span>
+        <span class="day-duration">~35 min</span>
+        <span class="day-chevron">+</span>
+      </button>
+      <div class="day-content">
+        <p class="day-focus">Focus: feel your back work — not just your arms. Initiate every pull from your shoulder blades.</p>
+        <table class="workout-table">
+          <thead><tr><th>Exercise</th><th>Sets</th><th class="reps">Reps</th><th>Rest</th></tr></thead>
+          <tbody>
+            <tr><td>Pull-ups (overhand)<span class="note">Can't do 5? Jump to top, lower yourself over 5 seconds. That's a negative.</span></td><td>3</td><td class="reps">Max (min 3)</td><td>90s</td></tr>
+            <tr><td>Chin-ups (underhand)<span class="note">Biceps get more involvement — most people find these slightly easier</span></td><td>3</td><td class="reps">Max (min 3)</td><td>90s</td></tr>
+            <tr><td>Inverted Rows<span class="note">Under a table or low bar. Body straight, pull chest to bar.</span></td><td>3</td><td class="reps">12</td><td>60s</td></tr>
+            <tr><td>Dead Hang<span class="note">Just hang. Full shoulder decompression. Grip work.</span></td><td>3</td><td class="reps">30 sec</td><td>60s</td></tr>
+          </tbody>
+        </table>
+        <div class="mod-box">
+          <p><strong>No pull-up bar?</strong> Do 4 sets of inverted rows instead. Get under a sturdy table, feet elevated on a chair for more difficulty.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="day-card">
+      <button class="day-toggle" onclick="toggleDay(this)">
+        <span class="day-tag">Day 3</span>
+        <span class="day-name">Legs + Core</span>
+        <span class="day-duration">~40 min</span>
+        <span class="day-chevron">+</span>
+      </button>
+      <div class="day-content">
+        <p class="day-focus">Focus: feel your legs under you. Slow squats reveal everything. No bouncing out of the hole.</p>
+        <table class="workout-table">
+          <thead><tr><th>Exercise</th><th>Sets</th><th class="reps">Reps</th><th>Rest</th></tr></thead>
+          <tbody>
+            <tr><td>Bodyweight Squats<span class="note">Full depth. Pause at the bottom for 1 second.</span></td><td>3</td><td class="reps">20</td><td>60s</td></tr>
+            <tr><td>Reverse Lunges<span class="note">Step back, not forward — easier on the knee</span></td><td>3</td><td class="reps">10 each</td><td>60s</td></tr>
+            <tr><td>Wall Sit<span class="note">Thighs parallel, back flat against wall</span></td><td>3</td><td class="reps">30 sec</td><td>45s</td></tr>
+          </tbody>
+        </table>
+        <p style="font-family:'Montserrat',sans-serif;font-size:0.6rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--copper);margin:1.2rem 0 0.8rem;">Ab Circuit — 3 Rounds, 45s rest between rounds</p>
+        <table class="workout-table">
+          <thead><tr><th>Exercise</th><th>Reps</th><th>Rest</th></tr></thead>
+          <tbody>
+            <tr><td>Plank</td><td class="reps">30 sec</td><td>None</td></tr>
+            <tr><td>Mountain Climbers</td><td class="reps">20</td><td>None</td></tr>
+            <tr><td>Leg Raises</td><td class="reps">15</td><td>None</td></tr>
+            <tr><td>Bicycle Crunches</td><td class="reps">20</td><td>45s then repeat</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="day-card">
+      <button class="day-toggle" onclick="toggleDay(this)">
+        <span class="day-tag">Day 4</span>
+        <span class="day-name">Active Challenge</span>
+        <span class="day-duration">45–60 min</span>
+        <span class="day-chevron">+</span>
+      </button>
+      <div class="day-content">
+        <p class="day-focus">Go outside. Do something real. See below for options — pick one and commit.</p>
+        <div class="mod-box" style="margin-top:0;margin-bottom:1rem;">
+          <p><strong>The rule:</strong> No treadmills. No jogging. You're not going for a casual walk — you're competing against yourself. The discomfort is the point. And get over who's watching. You're not doing this for them.</p>
+        </div>
+        <table class="workout-table">
+          <thead><tr><th>Option</th><th>Protocol</th></tr></thead>
+          <tbody>
+            <tr><td>Sprint Day<span class="note">Track, parking lot, field — anywhere with space</span></td><td class="reps" style="color:var(--white);font-size:0.85rem;">Walk 5 min to warm up. Sprint 80–90% for 20–30 sec. Walk back. Repeat 8×.</td></tr>
+            <tr><td>Sport Day<span class="note">Basketball, tennis, soccer, swimming, anything competitive</span></td><td class="reps" style="color:var(--white);font-size:0.85rem;">Play for 45 min minimum. Compete. Don't coast.</td></tr>
+            <tr><td>Challenge Day<span class="note">When you can't get outside</span></td><td class="reps" style="color:var(--white);font-size:0.85rem;">5 rounds: 10 burpees, 20 squats, 10 push-ups, 20 mountain climbers. As fast as possible.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- WEEK 2 -->
+  <div class="week-block" id="week2">
+    <div class="week-block-header">
+      <span class="week-block-num">Week 02</span>
+      <span class="week-block-title">Build</span>
+      <span class="week-block-theme">Test your limits.</span>
+    </div>
+
+    <div class="day-card">
+      <button class="day-toggle" onclick="toggleDay(this)">
+        <span class="day-tag">Day 5</span>
+        <span class="day-name">Push</span>
+        <span class="day-duration">~40 min</span>
+        <span class="day-chevron">+</span>
+      </button>
+      <div class="day-content">
+        <p class="day-focus">More volume. You know the movements now — no excuses for sloppy reps.</p>
+        <table class="workout-table">
+          <thead><tr><th>Exercise</th><th>Sets</th><th class="reps">Reps</th><th>Rest</th></tr></thead>
+          <tbody>
+            <tr><td>Push-ups</td><td>4</td><td class="reps">15</td><td>60s</td></tr>
+            <tr><td>Feet-Elevated Push-ups<span class="note">Feet on chair or bench — shifts load to upper chest and front delts</span></td><td>3</td><td class="reps">10</td><td>75s</td></tr>
+            <tr><td>Wide Push-ups</td><td>3</td><td class="reps">12</td><td>60s</td></tr>
+            <tr><td>Dips / Bench Dips</td><td>4</td><td class="reps">10</td><td>75s</td></tr>
+            <tr><td>Diamond Push-ups</td><td>3</td><td class="reps">12</td><td>60s</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="day-card">
+      <button class="day-toggle" onclick="toggleDay(this)">
+        <span class="day-tag">Day 6</span>
+        <span class="day-name">Pull</span>
+        <span class="day-duration">~40 min</span>
+        <span class="day-chevron">+</span>
+      </button>
+      <div class="day-content">
+        <p class="day-focus">Compare your pull numbers to Day 2. If you're not improving, check your rest between sets.</p>
+        <table class="workout-table">
+          <thead><tr><th>Exercise</th><th>Sets</th><th class="reps">Reps</th><th>Rest</th></tr></thead>
+          <tbody>
+            <tr><td>Pull-ups</td><td>4</td><td class="reps">Max</td><td>90s</td></tr>
+            <tr><td>Chin-ups</td><td>4</td><td class="reps">Max</td><td>90s</td></tr>
+            <tr><td>Inverted Rows</td><td>4</td><td class="reps">15</td><td>60s</td></tr>
+            <tr><td>Scapular Pull-ups<span class="note">Hang dead, then depress your shoulder blades only — no arm bend. Shoulder health drill.</span></td><td>3</td><td class="reps">10</td><td>60s</td></tr>
+            <tr><td>Dead Hang</td><td>3</td><td class="reps">45 sec</td><td>60s</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="day-card">
+      <button class="day-toggle" onclick="toggleDay(this)">
+        <span class="day-tag">Day 7</span>
+        <span class="day-name">Legs + Core</span>
+        <span class="day-duration">~45 min</span>
+        <span class="day-chevron">+</span>
+      </button>
+      <div class="day-content">
+        <p class="day-focus">Add difficulty. Jump squats and split squats will expose your weak leg. That's the point.</p>
+        <table class="workout-table">
+          <thead><tr><th>Exercise</th><th>Sets</th><th class="reps">Reps</th><th>Rest</th></tr></thead>
+          <tbody>
+            <tr><td>Bodyweight Squats</td><td>4</td><td class="reps">25</td><td>60s</td></tr>
+            <tr><td>Bulgarian Split Squats<span class="note">Rear foot elevated on chair — brutal single-leg strength test</span></td><td>3</td><td class="reps">12 each</td><td>75s</td></tr>
+            <tr><td>Jump Squats<span class="note">Land soft — absorb with your hips, not your knees</span></td><td>3</td><td class="reps">10</td><td>60s</td></tr>
+          </tbody>
+        </table>
+        <p style="font-family:'Montserrat',sans-serif;font-size:0.6rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--copper);margin:1.2rem 0 0.8rem;">Ab Circuit — 4 Rounds</p>
+        <table class="workout-table">
+          <thead><tr><th>Exercise</th><th>Reps</th></tr></thead>
+          <tbody>
+            <tr><td>Hollow Body Hold</td><td class="reps">30 sec</td></tr>
+            <tr><td>V-ups</td><td class="reps">15</td></tr>
+            <tr><td>Side Plank (each side)</td><td class="reps">25 sec</td></tr>
+            <tr><td>Mountain Climbers</td><td class="reps">30</td></tr>
+          </tbody>
+        </table>
+        <div class="mod-box"><p>60s rest between rounds.</p></div>
+      </div>
+    </div>
+
+    <div class="day-card">
+      <button class="day-toggle" onclick="toggleDay(this)">
+        <span class="day-tag">Day 8</span>
+        <span class="day-name">Active Challenge</span>
+        <span class="day-duration">45–60 min</span>
+        <span class="day-chevron">+</span>
+      </button>
+      <div class="day-content">
+        <p class="day-focus">Same options as Week 1. Go harder. If you sprinted 8 times, do 10. If you played a sport, compete harder.</p>
+        <div class="mod-box">
+          <p><strong>Track something:</strong> Sprint time, number of sprints, how the sport felt compared to last week. You're building data on yourself.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WEEK 3 -->
+  <div class="week-block" id="week3">
+    <div class="week-block-header">
+      <span class="week-block-num">Week 03</span>
+      <span class="week-block-title">Prove</span>
+      <span class="week-block-theme">Show yourself.</span>
+    </div>
+
+    <div class="day-card">
+      <button class="day-toggle" onclick="toggleDay(this)">
+        <span class="day-tag">Day 9</span>
+        <span class="day-name">Push — Max Effort</span>
+        <span class="day-duration">~40 min</span>
+        <span class="day-chevron">+</span>
+      </button>
+      <div class="day-content">
+        <p class="day-focus">Everything you have. Compare every number to Week 1.</p>
+        <table class="workout-table">
+          <thead><tr><th>Exercise</th><th>Sets</th><th class="reps">Reps</th><th>Rest</th></tr></thead>
+          <tbody>
+            <tr><td>Max Push-ups<span class="note">One clean set to failure. Write the number. Rest 3 min. Do it again.</span></td><td>2</td><td class="reps">Max</td><td>3 min</td></tr>
+            <tr><td>Feet-Elevated Push-ups</td><td>4</td><td class="reps">Max</td><td>75s</td></tr>
+            <tr><td>Dips / Bench Dips</td><td>4</td><td class="reps">Max</td><td>75s</td></tr>
+            <tr><td>Diamond Push-ups</td><td>3</td><td class="reps">Max</td><td>60s</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="day-card">
+      <button class="day-toggle" onclick="toggleDay(this)">
+        <span class="day-tag">Day 10</span>
+        <span class="day-name">Pull — Max Effort</span>
+        <span class="day-duration">~40 min</span>
+        <span class="day-chevron">+</span>
+      </button>
+      <div class="day-content">
+        <p class="day-focus">Pull until you can't. No assisted reps — if you're done, rest longer and try again.</p>
+        <table class="workout-table">
+          <thead><tr><th>Exercise</th><th>Sets</th><th class="reps">Reps</th><th>Rest</th></tr></thead>
+          <tbody>
+            <tr><td>Max Pull-ups<span class="note">Write this number. It tells you everything about your back strength.</span></td><td>3</td><td class="reps">Max</td><td>2 min</td></tr>
+            <tr><td>Max Chin-ups</td><td>3</td><td class="reps">Max</td><td>2 min</td></tr>
+            <tr><td>Inverted Rows</td><td>5</td><td class="reps">Max</td><td>60s</td></tr>
+            <tr><td>Dead Hang — Max Time<span class="note">One attempt. Hang until you drop.</span></td><td>1</td><td class="reps">Max time</td><td>—</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="day-card">
+      <button class="day-toggle" onclick="toggleDay(this)">
+        <span class="day-tag">Day 11</span>
+        <span class="day-name">Legs + Core — Max Effort</span>
+        <span class="day-duration">~45 min</span>
+        <span class="day-chevron">+</span>
+      </button>
+      <div class="day-content">
+        <p class="day-focus">Benchmark day for legs. Track your times. These numbers are yours to beat.</p>
+        <table class="workout-table">
+          <thead><tr><th>Exercise</th><th>Sets</th><th class="reps">Reps</th><th>Rest</th></tr></thead>
+          <tbody>
+            <tr><td>100 Squats for Time<span class="note">Go. Write your time. This is your benchmark.</span></td><td>1</td><td class="reps">100</td><td>3 min</td></tr>
+            <tr><td>Lunges — walking or stationary</td><td>3</td><td class="reps">20 each leg</td><td>60s</td></tr>
+            <tr><td>Max Plank Hold<span class="note">One attempt. Hold until form breaks. Write the time.</span></td><td>1</td><td class="reps">Max time</td><td>—</td></tr>
+          </tbody>
+        </table>
+        <p style="font-family:'Montserrat',sans-serif;font-size:0.6rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--copper);margin:1.2rem 0 0.8rem;">Ab Circuit — 5 Rounds, Max Effort</p>
+        <table class="workout-table">
+          <thead><tr><th>Exercise</th><th>Reps</th></tr></thead>
+          <tbody>
+            <tr><td>V-ups</td><td class="reps">20</td></tr>
+            <tr><td>Leg Raises</td><td class="reps">15</td></tr>
+            <tr><td>Bicycle Crunches</td><td class="reps">30</td></tr>
+            <tr><td>Mountain Climbers</td><td class="reps">30</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="day-card">
+      <button class="day-toggle" onclick="toggleDay(this)">
+        <span class="day-tag">Day 12</span>
+        <span class="day-name">Final Challenge</span>
+        <span class="day-duration">60 min</span>
+        <span class="day-chevron">+</span>
+      </button>
+      <div class="day-content">
+        <p class="day-focus">Outside. Everything you've got. This is your final test against yourself.</p>
+        <table class="workout-table">
+          <thead><tr><th>Activity</th><th>Protocol</th></tr></thead>
+          <tbody>
+            <tr><td>Sprint Session</td><td class="reps" style="color:var(--white);font-size:0.85rem;">10–12 sprints. Faster than Week 1. Track your recovery — you should need less time between efforts.</td></tr>
+            <tr><td>Sport / Swim / Compete</td><td class="reps" style="color:var(--white);font-size:0.85rem;">Go play. 45–60 min. Notice how different your body feels compared to Week 1.</td></tr>
+          </tbody>
+        </table>
+        <div class="mod-box">
+          <p><strong>After this session:</strong> Write down 3 things that are different about your body from Day 1. Strength, endurance, awareness, confidence — anything. That's not motivation talk. That's data.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<!-- ACTIVE CHALLENGE EXPLAINED -->
+<hr class="div">
+<div class="challenge-bg">
+  <div class="wrap--wide">
+    <p class="section-label">The active challenge day</p>
+    <h2>Once a week, <span class="accent">do something real.</span></h2>
+    <p class="body-text" style="max-width:500px;">Jogging on a treadmill is not the same as sprinting outside. Playing a sport is not the same as staring at a wall. The Active Challenge day exists because your body was built to move in the real world — not on machines, not in a straight line.</p>
+    <div class="challenge-options">
+      <div class="challenge-card">
+        <div class="challenge-title">Sprint</div>
+        <p class="challenge-body">Find a track, a hill, an empty street. Walk your warmup. Then run like you mean it — 80-90%, not a jog. Your lungs will know the difference.</p>
+      </div>
+      <div class="challenge-card">
+        <div class="challenge-title">Sport</div>
+        <p class="challenge-body">Basketball, tennis, swimming, martial arts — anything with competition or coordination. Compete. Don't coast. Playing to win is a different stimulus than structured training.</p>
+      </div>
+      <div class="challenge-card">
+        <div class="challenge-title">Go Alone if You Have To</div>
+        <p class="challenge-body">Get over what people think. The person at the track alone at 7am sprinting isn't embarrassing themselves — they're doing the work. You know this is good for you. That's enough.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- RULES -->
+<hr class="div">
+<div class="rules-bg">
+  <div class="wrap">
+    <p class="section-label">How this works</p>
+    <h2>Simple rules. <span class="accent">No exceptions.</span></h2>
+    <ul class="rules-list">
+      <li>
+        <span class="rule-num">1</span>
+        <span class="rule-text"><strong>Write your numbers.</strong> Every set, every session. Growth that isn't measured isn't real. You can't self-diagnose what you never tracked.</span>
+      </li>
+      <li>
+        <span class="rule-num">2</span>
+        <span class="rule-text"><strong>Full range of motion or it didn't count.</strong> Half reps are a lie you're telling yourself. Chest to floor on push-ups. Below parallel on squats.</span>
+      </li>
+      <li>
+        <span class="rule-num">3</span>
+        <span class="rule-text"><strong>Rest days are real.</strong> Three days off per week isn't weakness. It's how the body adapts. Use them. Sleep counts as training.</span>
+      </li>
+      <li>
+        <span class="rule-num">4</span>
+        <span class="rule-text"><strong>Don't skip the Active Challenge.</strong> This is the day most people skip. It's also the most important. Get outside. Do something uncomfortable. That discomfort is information.</span>
+      </li>
+      <li>
+        <span class="rule-num">5</span>
+        <span class="rule-text"><strong>Forgive a missed day — don't make it a trend.</strong> Miss a session? Start the next one. Don't double up, don't punish yourself. Just show back up.</span>
+      </li>
+      <li>
+        <span class="rule-num">6</span>
+        <span class="rule-text"><strong>The only person this needs to impress is you.</strong> No audience needed. The work is between you and what you were yesterday.</span>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<!-- BENCHMARK LOG -->
+<hr class="div">
+<div class="log-bg">
+  <div class="wrap--wide">
+    <p class="section-label">Your benchmark log</p>
+    <h2>Track your <span class="accent">proof.</span></h2>
+    <p class="body-text">Screenshot or write these down before Day 1. Fill in Week 3 results when you're done. The gap between those two columns is the work.</p>
+    <div class="log-grid">
+      <div class="log-card">
+        <div class="log-label">Max Push-ups</div>
+        <div class="log-blank"></div>
+        <div style="font-size:0.62rem;color:rgba(154,154,154,0.3);margin-top:0.3rem;">Day 1 / Day 9</div>
+      </div>
+      <div class="log-card">
+        <div class="log-label">Max Pull-ups</div>
+        <div class="log-blank"></div>
+        <div style="font-size:0.62rem;color:rgba(154,154,154,0.3);margin-top:0.3rem;">Day 2 / Day 10</div>
+      </div>
+      <div class="log-card">
+        <div class="log-label">100 Squats (time)</div>
+        <div class="log-blank"></div>
+        <div style="font-size:0.62rem;color:rgba(154,154,154,0.3);margin-top:0.3rem;">Day 3 / Day 11</div>
+      </div>
+      <div class="log-card">
+        <div class="log-label">Max Plank Hold</div>
+        <div class="log-blank"></div>
+        <div style="font-size:0.62rem;color:rgba(154,154,154,0.3);margin-top:0.3rem;">Day 3 / Day 11</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CTA -->
+<hr class="div">
+<div class="cta-bg">
+  <div class="wrap cta-inner" style="text-align:center;">
+    <p class="section-label">What's next</p>
+    <h2>GROUNDWORK is the starting line.<br><span class="accent">1:1 coaching is what comes after.</span></h2>
+    <p class="body-text" style="max-width:460px;margin:0 auto 2.5rem;">You've proven the basics work. If you want a program built specifically around your schedule, your body, and your goals — with a coach in your corner every day — that's what The Standard is.</p>
+    <a class="btn-primary" href="https://dylanbucherfitness.github.io/the-standard/apply.html">Apply for 1:1 Coaching</a>
+    <p class="cta-note">One call. You'll know if it's the right fit.</p>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p class="footer-brand">THE STANDARD</p>
+  <p class="footer-tagline">Built by nature. Proven by work.</p>
+  <div class="footer-links">
+    <a href="https://www.instagram.com/dybuc/" target="_blank">@dybuc</a>
+    <a href="https://bio.site/dybuc" target="_blank">More Links</a>
+    <a href="https://dylanbucherfitness.github.io/the-standard/">The Standard</a>
+  </div>
+</footer>
+
+<script>
+function toggleDay(btn) {
+  var card = btn.closest('.day-card');
+  var isOpen = card.classList.contains('is-open');
+  card.classList.toggle('is-open', !isOpen);
+}
+
+// Auto-open Day 1 on load
+document.addEventListener('DOMContentLoaded', function() {
+  var first = document.querySelector('.day-card');
+  if (first) first.classList.add('is-open');
+});
+</script>
 </body>
 </html>
